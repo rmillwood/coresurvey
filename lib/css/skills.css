@@ -1,0 +1,129 @@
+/* Skills Survey CSS */
+/**
+*   Vertical questions
+**/
+.question_list {
+    padding:0px 0px;
+}
+
+.question_list li {
+    width: 15%;
+    float: left;
+    list-style-type: none;
+}
+.question_list li.title_key {
+    width: 80px;
+    float: left;
+    list-style-type: none;
+    font-weight: bold;
+}
+.vertical_pad {
+    margin-right: 8px;
+    border: 2px dotted #ccc;
+    background-color:#fffac8;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    min-width: 50px;
+    padding: 0px 8px;
+}
+.vertical_question_title {
+    height: 96px;
+}
+.ui-slider-vertical {
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+.vertical_slider_container {
+    border-top: 1px dotted #ccc;
+    padding: 8px 8px;
+    height: 175px;
+    vertical-align: middle;
+}
+.vertical_statements_container {
+    min-height: 1px;
+    background-color:#FFF;
+    border: 2px solid #888;
+    border-radius: 20px;
+    padding: 4px 8px;
+    margin-right: 8px;
+
+}
+
+.ui-slider-vertical {
+    height: 175px;
+}
+.slider_header_title {
+    font-weight: bold;
+}
+
+.title_key {
+    margin-right: 8px;
+    border:none;
+    background:none;
+}
+
+
+.abilities-thought-bubbles {
+}
+
+.abilities-thought-bubble1 {
+    height: 10px;
+    width: 10px;
+    background-color:#fff;
+    border: 2px solid #888;
+    border-radius: 24px;
+    margin-top:4px;
+    margin-left:60px;
+}
+.abilities-thought-bubble2 {
+    height: 20px;
+    width: 20px;
+    background-color:#fff;
+    border: 2px solid #888;
+    border-radius: 24px;
+    margin-left:40px;
+    margin-bottom:4px;
+}
+
+
+/**
+*   Skills table
+**/
+
+.skills_table {
+    border: 2px solid #000;
+    background-color: #FFF;
+}
+
+.skills_table tr {
+    border:none;
+}
+.skills_table td, th {
+    border-left: 2px dotted #000;
+    border-right: 2px dotted #000;
+    vertical-align: top;
+    padding: 4px 4px 16px 4px;
+}
+.skills_table .btop {
+    border-top: 2px dotted #000;
+}
+.skills_table .nobtop {
+    border-top: none;
+}
+.skills_table .bbottom {
+    border-bottom: 2px dotted #000;
+}
+.ybox {
+    background: #d0e8b1;
+    border-left: 2px dotted #000;
+    border-right: 2px dotted #000;
+    padding: 4px 4px 4px 4px;
+
+}
+.print_button {
+   float: right;
+}
+.return_to_overview_button {
+   float: right;
+}
+

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="mod/coresurvey/db" VERSION="20120901" COMMENT="XMLDB file for Moodle mod/coresurvey"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="coresurvey" COMMENT="coresurvey db info" NEXT="coresurveyrole">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="course"/>
+        <FIELD NAME="course" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" COMMENT="Course coresurvey activity belongs to" PREVIOUS="id" NEXT="name"/>
+        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="name field for moodle instances" PREVIOUS="course" NEXT="intro"/>
+        <FIELD NAME="intro" TYPE="text" LENGTH="medium" NOTNULL="false" SEQUENCE="false" COMMENT="General introduction of the coresurvey activity" PREVIOUS="name" NEXT="introformat"/>
+        <FIELD NAME="introformat" TYPE="int" LENGTH="4" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" COMMENT="Format of the intro field (MOODLE, HTML, MARKDOWN...)" PREVIOUS="intro" NEXT="timecreated"/>
+
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="introformat" NEXT="timemodified"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="timecreated"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="course" UNIQUE="false" FIELDS="course"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="coresurveyrole" COMMENT="stores role survey data" PREVIOUS="coresurvey" NEXT="coresurveyskill">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="createdate"/>
+        <FIELD NAME="createdate" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" COMMENT="date role survey was created" PREVIOUS="id" NEXT="roledata"/>
+        <FIELD NAME="roledata" TYPE="text" LENGTH="big" NOTNULL="false" SEQUENCE="false" COMMENT="gzcompresses serialized array of data" PREVIOUS="createdate" NEXT="versionnumber"/>
+        <FIELD NAME="versionnumber" TYPE="int" LENGTH="6" NOTNULL="false" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" COMMENT="a version number for the survey" PREVIOUS="roledata" NEXT="taken"/>
+        <FIELD NAME="taken" TYPE="int" LENGTH="6" NOTNULL="false" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" COMMENT="records the number of times this particular survey has been taken" PREVIOUS="versionnumber" NEXT="matrix"/>
+	<FIELD NAME="matrix" TYPE="text" LENGTH="big" NOTNULL="false" SEQUENCE="false" COMMENT="gzcompresses serialized array of data" PREVIOUS="taken"/>
+      </FIELDS>
+
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="createdate" UNIQUE="false" FIELDS="createdate" NEXT="versionnumber"/>
+        <INDEX NAME="versionnumber" UNIQUE="false" FIELDS="versionnumber" PREVIOUS="createdate"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="coresurveyskill" COMMENT="stores skill survey data" PREVIOUS="coresurveyrole" NEXT="coresurvey_textr">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="createdate"/>
+        <FIELD NAME="createdate" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" COMMENT="date skill survey was created" PREVIOUS="id" NEXT="skilldata"/>
+        <FIELD NAME="skilldata" TYPE="text" LENGTH="big" NOTNULL="false" SEQUENCE="false" COMMENT="gzcompresses serialized array of data" PREVIOUS="createdate" NEXT="versionnumber"/>
+        <FIELD NAME="versionnumber" TYPE="int" LENGTH="6" NOTNULL="false" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" COMMENT="a version number for the survey" PREVIOUS="skilldata" NEXT="taken"/>
+        <FIELD NAME="taken" TYPE="int" LENGTH="6" NOTNULL="false" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" COMMENT="records the number of times this particular survey has been taken" PREVIOUS="versionnumber" NEXT="matrix"/>
+	<FIELD NAME="matrix" TYPE="text" LENGTH="big" NOTNULL="false" SEQUENCE="false" COMMENT="gzcompresses serialized array of data" PREVIOUS="taken"/>
+      </FIELDS>
+
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="createdate" UNIQUE="false" FIELDS="createdate" NEXT="versionnumber"/>
+        <INDEX NAME="versionnumber" UNIQUE="false" FIELDS="versionnumber" PREVIOUS="createdate"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="coresurvey_textr" COMMENT="editable text" PREVIOUS="coresurveyskill" NEXT="coresurveyrole_member">
+	<FIELDS>
+	    <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="data"/>
+	    <FIELD NAME="data" TYPE="text" LENGTH="big" NOTNULL="false" SEQUENCE="false" PREVIOUS="id"/>
+	</FIELDS>
+	<KEYS>
+	    <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+	</KEYS>
+    </TABLE>
+    <TABLE NAME="coresurveyrole_member" COMMENT="coresurveyrole_member table retrofitted from MySQL" PREVIOUS="coresurvey_textr" NEXT="coresurveyskill_member">
+	<FIELDS>
+	    <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="m_id"/>
+	    <FIELD NAME="m_id" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="id" NEXT="survey_id"/>
+	    <FIELD NAME="survey_id" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="m_id" NEXT="completed"/>
+	    <FIELD NAME="completed" TYPE="int" LENGTH="4" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="survey_id" NEXT="start_date"/>
+	    <FIELD NAME="start_date" TYPE="datetime" NOTNULL="true" SEQUENCE="false" PREVIOUS="completed" NEXT="end_date"/>
+	    <FIELD NAME="end_date" TYPE="datetime" NOTNULL="true" SEQUENCE="false" PREVIOUS="start_date" NEXT="results"/>
+	    <FIELD NAME="results" TYPE="text" LENGTH="big" NOTNULL="true" SEQUENCE="false" PREVIOUS="end_date"/>
+	</FIELDS>
+	<KEYS>
+	    <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+	</KEYS>
+	<INDEXES>
+	    <INDEX NAME="m_id" UNIQUE="false" FIELDS="m_id" NEXT="survey_id"/>
+	    <INDEX NAME="survey_id" UNIQUE="false" FIELDS="survey_id" PREVIOUS="m_id" NEXT="start_date"/>
+	    <INDEX NAME="start_date" UNIQUE="false" FIELDS="start_date" PREVIOUS="survey_id"/>
+	</INDEXES>
+    </TABLE>
+    <TABLE NAME="coresurveyskill_member" COMMENT="coresurveyskill_member table retrofitted from MySQL" PREVIOUS="coresurveyrole_member">
+	<FIELDS>
+	    <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="m_id"/>
+	    <FIELD NAME="m_id" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="id" NEXT="survey_id"/>
+	    <FIELD NAME="survey_id" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="m_id" NEXT="completed"/>
+	    <FIELD NAME="completed" TYPE="int" LENGTH="4" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="survey_id" NEXT="start_date"/>
+	    <FIELD NAME="start_date" TYPE="datetime" NOTNULL="true" SEQUENCE="false" PREVIOUS="completed" NEXT="end_date"/>
+	    <FIELD NAME="end_date" TYPE="datetime" NOTNULL="true" SEQUENCE="false" PREVIOUS="start_date" NEXT="results"/>
+	    <FIELD NAME="results" TYPE="text" LENGTH="big" NOTNULL="true" SEQUENCE="false" PREVIOUS="end_date" NEXT="type"/>
+	    <FIELD NAME="type" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="results"/>
+	</FIELDS>
+	<KEYS>
+	    <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+	</KEYS>
+	<INDEXES>
+	    <INDEX NAME="m_id" UNIQUE="false" FIELDS="m_id" NEXT="survey_id"/>
+	    <INDEX NAME="survey_id" UNIQUE="false" FIELDS="survey_id" PREVIOUS="m_id" NEXT="start_date"/>
+	    <INDEX NAME="start_date" UNIQUE="false" FIELDS="start_date" PREVIOUS="survey_id"/>
+	</INDEXES>
+    </TABLE>
+  </TABLES>
+</XMLDB>

@@ -1,0 +1,80 @@
+<HTML>
+<HEAD>
+<TITLE>
+Scripts to support CJK-LaTeX
+</TITLE>
+</HEAD>
+<BODY>
+<H2>
+Scripts to support CJK-LaTeX
+</H2>
+
+by Mike Fabian
+&lt;mfabian@suse.de&gt;
+<p>
+
+The tiny Perl-script '<strong>sfd2map</strong>' converts <strong>.sfd</strong> files (as used by
+CJK-LaTeX) to <strong>.map</strong> files (as used by ttf2pt1).
+<p>
+
+Actually I currently don't use that script stand-alone for performance
+reasons.
+<p>
+
+Currently I use such a conversion in another small script '<strong>cjk-latex-config</strong>'
+(attached as well) which creates <strong>.tfm</strong> files usable with CJK-LaTeX
+from TrueType fonts as listed in <strong>/etc/ttf2pk/ttfonts.map</strong>. When called like
+<br>
+&nbsp;&nbsp;<strong>cjk-latex-config --type1</strong>
+<br>
+this script will use ttf2pt1 to generate <strong>.pfb</strong> files as well from these TrueType
+fonts to be used with CJK-LaTeX.
+<p>
+
+The <strong>.sfd</strong> files cannot be directly used as input to ttf2pt1 because the
+format of the <strong>.map</strong> files which ttf2pt1 expects is slightly different,
+therefore I made the '<strong>sfd2map</strong>' converter script.
+<p>
+
+But then I noticed that I would have to parse the generated map file
+*again* to get a list of the plane numbers to use. That seemed to be a
+bit wastful because I had just parsed the <strong>.sfd</strong> file to convert it to
+<strong>.map</strong>, therefore I included <strong>sfd2map</strong> as a function in '<strong>cjk-latex-config</strong>'
+as well and collected the plane numbers during the conversion.
+<p>
+
+But '<strong>cjk-latex-config</strong>' is maybe a little bit SuSE specific, therefore
+I kept '<strong>sfd2map</strong>' also as a standalong script. Use it if you like.
+<p>
+
+'<strong>cjk-latex-config</strong>' calls another small script '<strong>cjk-latex-t1mapgen</strong>'
+to generate a <strong>cjk-latex.map</strong> file containing something like
+<br>
+<strong>&nbsp;&nbsp;cyberb00 BitstreamCyberbit-Roman-00 cyberb00.pfb</strong>
+<br>
+<strong>&nbsp;&nbsp;cyberb01 BitstreamCyberbit-Roman-01 cyberb01.pfb</strong>
+<br>
+<strong>&nbsp;&nbsp;cyberb02 BitstreamCyberbit-Roman-02 cyberb02.pfb</strong>
+<br>
+<strong>&nbsp;&nbsp;[...]</strong>
+<br>
+after all <strong>.pfb</strong> files have been generated.
+<p>
+
+Maybe this is also SuSE specific, I'm not sure about in what
+directories the relevant files are stored on other Linux-like systems.
+<p>
+
+I'm not yet sure whether they work on other systems beside SuSE Linux.
+They have hard coded path names where to find the TrueType fonts,
+<strong>ttfonts.map</strong>, the TeX fonts etc and <strong>cjk-latex-config</strong> checks
+whether freetype-tools.rpm is installed. freetype-tools.rpm might
+have another name for other distributions and for distributions
+which don't use rpm this check can't work anyway. 
+<p>
+
+These are small details and it should not be difficult to adapt the
+scripts for other Linux-like systems though.
+<p>
+</BODY>
+</HTML>

@@ -1,0 +1,28 @@
+/* error messgae */
+#errormessage, .core_error_box {
+	border : 1px solid #FBC2C4;
+	background: url('../../images/warning.png') no-repeat top left #FBE3E4;
+	-moz-border-radius: 4px;
+	padding: 5px 5px 5px 45px;
+	color: #8A1F11;
+	margin-bottom: 10px;
+	min-height: 40px;
+}
+#errormessage h2 {
+	font-size: 116%;
+	font-weight: bold;
+}
+/* status messgae */
+#statusmessage, .core_status_box {
+	border : 1px solid #FFD324;
+	background: url('../../images/info.png') no-repeat top left #FFF6BF;
+	-moz-border-radius: 4px;
+	padding: 5px 5px 5px 45px;
+	color: #514721;
+	margin-bottom: 10px;
+	min-height: 40px;
+}
+#statusmessage h2 {
+	font-size: 116%;
+	font-weight: bold;
+}

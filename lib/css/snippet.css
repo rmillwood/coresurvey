@@ -1,0 +1,110 @@
+/* Snippets Css file */
+#SnippetHeader {
+    font-size: 138.5%;
+    font-weight: bold;
+}
+/* Forms */
+/* Admin Form */
+.adminform {
+	background: #F7F3E5;
+	-moz-border-radius: 4px;
+	border: 1px solid #E8D2B8;
+	padding: 5px;
+	margin-bottom: 10px;
+}
+.adminform legend {
+	background-color:#FFFFFF;
+	border:1px solid #E8D2B8;
+	color:#333333;
+	padding: 3px 10px;
+	-moz-border-radius: 4px;
+	font-weight: bold;
+	font-size: 116%;
+}
+.adminform p {
+	border-bottom:1px solid #E8D2B8;
+	padding-bottom: 4px;
+	margin-bottom: 4px;
+}
+.adminform label {
+	color:#754C24;
+	display:block;
+	font-size: 108%;
+	font-weight:bold;
+	margin-bottom:10px;
+}
+.required {
+	font-weight: bold;
+	color: #CC6600;
+}
+.adminform input, .adminform textarea {
+	background-color:#FFFFFF;
+	-moz-border-radius: 4px;
+	border:2px solid #CCCCCC !important;
+	color: #666666;
+	padding: 3px;
+	margin-bottom: 10px;
+}
+.adminform input:focus {
+	border:2px solid #A2BEDE;
+}
+.adminform select {
+	background-color:#FFFFFF;
+	-moz-border-radius: 4px;
+	border:2px solid #CCCCCC;
+	color: #666666;
+	padding: 3px;
+	margin-bottom: 10px;
+}
+.adminform select:focus {
+	border:2px solid #A2BEDE;
+}
+.adminform button {
+	width: 173px;
+	height: 55px;
+	line-height: 55px;
+	text-align: center;
+	color: #00A246;
+	margin: 0 auto;
+	font-weight: bold;
+	font-size: 116%;
+	border: 2px solid #00A246;
+	background: #fff;
+        -moz-border-radius: 6px;
+        -webkit-border-radius: 6px;
+}
+.adminform button:hover {
+	cursor: pointer;
+	font-size: 123.1%;
+        border: 2px solid red;
+        color: red;
+}
+/* error messgae */
+#errormessage {
+	border : 1px solid #FBC2C4;
+	background: url('../../images/warning.png') no-repeat top left #FBE3E4;
+	-moz-border-radius: 4px;
+	padding: 5px 5px 5px 45px;
+	color: #8A1F11;
+	margin: 15px 0px;
+	min-height: 40px;
+}
+#errormessage h2 {
+	font-size: 116%;
+	font-weight: bold;
+}
+/* status messgae */
+#statusmessage {
+	border : 1px solid #FFD324;
+	background: url('../../images/info.png') no-repeat top left #FFF6BF;
+	-moz-border-radius: 4px;
+	padding: 5px 5px 5px 45px;
+	color: #514721;
+	margin: 15px 0px;
+	min-height: 40px;
+}
+#statusmessage h2 {
+	font-size: 116%;
+	font-weight: bold;
+}
+

@@ -1,0 +1,200 @@
+/* Survey CSS */
+
+#surveyform fieldset {
+   border: none;
+}
+
+#surveyform .ui-slider {
+background-color:#CEC;
+border:1px solid #ABA;
+}
+
+.attitudeandactivityandyoumightthink {
+    width:760px;
+}
+
+.attitudeandactivitytitle {
+    width: 416px;
+    float:left;
+    padding:4px;
+}
+
+.attitudeandactivity {
+    border: 3px dotted #0A0;
+    background-color:#EFE;
+    padding:8px;
+    min-height: 96px;
+    width: 416px;
+    float:left;
+    margin-bottom: 12px;
+}
+.attitude {
+    float:left;
+    width:200px;
+    padding-left: 8px;
+    text-align: center;
+}
+.activity {
+   float:right;
+   width:200px;
+   padding:none;
+   text-align: left;
+}
+
+
+.youmightthink {
+    float:right;
+    width: 320px;
+    text-align: center;
+    vertical-align:middle;
+    padding-top:4px;
+}
+
+.thought-bubbles {
+}
+
+.thought-bubble1 {
+    float:left;
+    height: 10px;
+    width: 10px;
+    background-color:#fff;
+    border: 2px solid #888;
+    border-radius: 24px;
+    margin-left: 4px;
+    margin-top:32px;
+}
+.thought-bubble2 {
+    float:left;
+    height: 20px;
+    width: 20px;
+    background-color:#fff;
+    border: 2px solid #888;
+    border-radius: 24px;
+    margin-top: 16px;
+    margin-left: 4px;
+}
+.thought {
+    width:200;
+    min-height: 40px;
+    background-color:#FFF;
+    border: 2px solid #888;
+    border-radius: 20px;
+    padding: 4px 8px;
+    margin-left: 54px;
+}
+
+#pausedRoles {
+    border: 3px dotted #0A0;
+    background-color:#CFC;
+    list-style-type: none; 
+    padding: 8px;
+    margin: 0px;
+    background-color:##CFC;
+    font-size:100%;
+    font-weight:normal;
+}
+
+#completedRoles {
+    border: 3px solid #0A0;
+    background-color:#CFC;
+    list-style-type: none; 
+    padding: 8px;
+    margin: 0px;
+    background-color:##CFC;
+    font-size:100%;
+    font-weight:normal;
+}
+
+#pausedSkills {
+    border: 3px dotted #0A0;
+    background-color:#fffac8;
+    list-style-type: none; 
+    padding: 8px;
+    margin: 0px;
+    background-color:##CFC;
+    font-size:100%;
+    font-weight:normal;
+}
+
+#completedSkills {
+    border: 3px solid #0A0;
+    background-color:#fffac8;
+    list-style-type: none; 
+    padding: 8px;
+    margin: 0px;
+    background-color:##CFC;
+    font-size:100%;
+    font-weight:normal;
+}
+
+#completedRoles li {
+    background-image: url('rolesIcon.gif');
+    background-repeat: no-repeat;
+    padding-left: 24px;
+}
+
+#pausedRoles li {
+    background-image: url('rolesIcon.gif');
+    background-repeat: no-repeat;
+    padding-left: 24px;
+}
+#completedSkills li {
+    background-image: url('skillsIcon.gif');
+    background-repeat: no-repeat;
+    padding-left: 24px;
+}
+
+#pausedSkills li {
+    background-image: url('skillsIcon.gif');
+    background-repeat: no-repeat;
+    padding-left: 24px;
+}.align_statement {
+    display: none;
+}
+
+/* Form wizard */
+.prev, .next {
+    background-color:#b0232a;
+    padding:5px 10px;
+    color:#fff !important;
+    text-decoration:none;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+}
+.prev:hover, .next:hover {
+    background-color:#000;
+    text-decoration:none;
+}
+.prev {
+    float:left;
+}
+.next {
+    float:right;
+}
+#steps {
+    list-style:none;
+    text-align: center;
+    margin:0px;
+    padding:0px;
+}
+#steps li {
+    font-size:116%;
+    margin: 0 auto;
+    padding:10px;
+    color:#b0b1b3;
+    display: inline-block;
+}
+#steps li span {
+    font-size:85%;
+    display:block;
+}
+#steps li.current {
+    color:#000;
+}
+.tooltip{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    display: none;
+}

@@ -1,0 +1,8 @@
+/* Print CSS */
+    
+div#header{display: none;}
+div.navbar{display: none;}
+div#content{font-size: smaller;}
+div.print_button{display: none;}
+div.return_to_overview_button{display: none;}
+div#footer{display: none;}
