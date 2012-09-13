@@ -1,1 +1,1 @@
-This code is a half finished upgrade from Moodle 1.9 to Moodle 2.3 of an activity module (mod). It sfunction is to perform a reflective survey for charity volunteers.
+This code is a half finished upgrade from Moodle 1.9 to Moodle 2.3 of an activity module (mod). Its function is to perform a reflective survey for charity volunteers. First developed by Core Education in New Zealand for Macmillan Cancer Support it is now being developed further by Richard Millwood at Core Education UK.
