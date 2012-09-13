@@ -1,0 +1,1 @@
+This code is a half finished upgrade from Moodle 1.9 to Moodle 2.3 of an activity module (mod). It sfunction is to perform a reflective survey for charity volunteers.
