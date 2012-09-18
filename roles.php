@@ -88,7 +88,7 @@ $PAGE->set_heading(format_string($course->fullname));
     echo $core_page->displayBody();
     echo "<!-- END: Body Files -->";
     // javascript
-   $core_page->displayJavascript();
+   //$core_page->displayJavascript();
 
 /// Finish the page
 echo $OUTPUT->footer();

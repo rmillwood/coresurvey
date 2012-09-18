@@ -1,0 +1,335 @@
+@CHARSET "UTF-8";
+/* This section was a separate file - lib/css/public_survey.css */
+
+#surveyform fieldset {
+   border: none;
+}
+
+#surveyform .ui-slider {
+background-color:#CEC;
+border:1px solid #ABA;
+}
+
+.attitudeandactivityandyoumightthink {
+    width:760px;
+}
+
+.attitudeandactivitytitle {
+    width: 416px;
+    float:left;
+    padding:4px;
+}
+
+.attitudeandactivity {
+    border: 3px dotted #0A0;
+    background-color:#EFE;
+    padding:8px;
+    min-height: 96px;
+    width: 416px;
+    float:left;
+    margin-bottom: 12px;
+}
+.attitude {
+    float:left;
+    width:200px;
+    padding-left: 8px;
+    text-align: center;
+}
+.activity {
+   float:right;
+   width:200px;
+   padding:none;
+   text-align: left;
+}
+
+
+.youmightthink {
+    float:right;
+    width: 320px;
+    text-align: center;
+    vertical-align:middle;
+    padding-top:4px;
+}
+
+.thought-bubbles {
+}
+
+.thought-bubble1 {
+    float:left;
+    height: 10px;
+    width: 10px;
+    background-color:#fff;
+    border: 2px solid #888;
+    border-radius: 24px;
+    margin-left: 4px;
+    margin-top:32px;
+}
+.thought-bubble2 {
+    float:left;
+    height: 20px;
+    width: 20px;
+    background-color:#fff;
+    border: 2px solid #888;
+    border-radius: 24px;
+    margin-top: 16px;
+    margin-left: 4px;
+}
+.thought {
+    width:200;
+    min-height: 40px;
+    background-color:#FFF;
+    border: 2px solid #888;
+    border-radius: 20px;
+    padding: 4px 8px;
+    margin-left: 54px;
+}
+
+#pausedRoles {
+    border: 3px dotted #0A0;
+    background-color:#CFC;
+    list-style-type: none; 
+    padding: 8px;
+    margin: 0px;
+    background-color:##CFC;
+    font-size:100%;
+    font-weight:normal;
+}
+
+#completedRoles {
+    border: 3px solid #0A0;
+    background-color:#CFC;
+    list-style-type: none; 
+    padding: 8px;
+    margin: 0px;
+    background-color:##CFC;
+    font-size:100%;
+    font-weight:normal;
+}
+
+#pausedSkills {
+    border: 3px dotted #0A0;
+    background-color:#fffac8;
+    list-style-type: none; 
+    padding: 8px;
+    margin: 0px;
+    background-color:##CFC;
+    font-size:100%;
+    font-weight:normal;
+}
+
+#completedSkills {
+    border: 3px solid #0A0;
+    background-color:#fffac8;
+    list-style-type: none; 
+    padding: 8px;
+    margin: 0px;
+    background-color:##CFC;
+    font-size:100%;
+    font-weight:normal;
+}
+
+#completedRoles li {
+    background-image: url('rolesIcon.gif');
+    background-repeat: no-repeat;
+    padding-left: 24px;
+}
+
+#pausedRoles li {
+    background-image: url('rolesIcon.gif');
+    background-repeat: no-repeat;
+    padding-left: 24px;
+}
+#completedSkills li {
+    background-image: url('skillsIcon.gif');
+    background-repeat: no-repeat;
+    padding-left: 24px;
+}
+
+#pausedSkills li {
+    background-image: url('skillsIcon.gif');
+    background-repeat: no-repeat;
+    padding-left: 24px;
+}.align_statement {
+    display: none;
+}
+
+/* Form wizard */
+.prev, .next {
+    background-color:#b0232a;
+    padding:5px 10px;
+    color:#fff !important;
+    text-decoration:none;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+}
+.prev:hover, .next:hover {
+    background-color:#000;
+    text-decoration:none;
+}
+.prev {
+    float:left;
+}
+.next {
+    float:right;
+}
+#steps {
+    list-style:none;
+    text-align: center;
+    margin:0px;
+    padding:0px;
+}
+#steps li {
+    font-size:116%;
+    margin: 0 auto;
+    padding:10px;
+    color:#b0b1b3;
+    display: inline-block;
+}
+#steps li span {
+    font-size:85%;
+    display:block;
+}
+#steps li.current {
+    color:#000;
+}
+.tooltip{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    display: none;
+}
+
+/* End of section which was a separate file - lib/css/public_survey.css */
+
+
+/* This section was a separate file - lib/css/skills.css */
+/**
+*   Vertical questions
+**/
+.question_list {
+    padding:0px 0px;
+}
+
+.question_list li {
+    width: 15%;
+    float: left;
+    list-style-type: none;
+}
+.question_list li.title_key {
+    width: 80px;
+    float: left;
+    list-style-type: none;
+    font-weight: bold;
+}
+.vertical_pad {
+    margin-right: 8px;
+    border: 2px dotted #ccc;
+    background-color:#fffac8;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    min-width: 50px;
+    padding: 0px 8px;
+}
+.vertical_question_title {
+    height: 96px;
+}
+.ui-slider-vertical {
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+.vertical_slider_container {
+    border-top: 1px dotted #ccc;
+    padding: 8px 8px;
+    height: 175px;
+    vertical-align: middle;
+}
+.vertical_statements_container {
+    min-height: 1px;
+    background-color:#FFF;
+    border: 2px solid #888;
+    border-radius: 20px;
+    padding: 4px 8px;
+    margin-right: 8px;
+
+}
+
+.ui-slider-vertical {
+    height: 175px;
+}
+.slider_header_title {
+    font-weight: bold;
+}
+
+.title_key {
+    margin-right: 8px;
+    border:none;
+    background:none;
+}
+
+
+.abilities-thought-bubbles {
+}
+
+.abilities-thought-bubble1 {
+    height: 10px;
+    width: 10px;
+    background-color:#fff;
+    border: 2px solid #888;
+    border-radius: 24px;
+    margin-top:4px;
+    margin-left:60px;
+}
+.abilities-thought-bubble2 {
+    height: 20px;
+    width: 20px;
+    background-color:#fff;
+    border: 2px solid #888;
+    border-radius: 24px;
+    margin-left:40px;
+    margin-bottom:4px;
+}
+
+
+/**
+*   Skills table
+**/
+
+.skills_table {
+    border: 2px solid #000;
+    background-color: #FFF;
+}
+
+.skills_table tr {
+    border:none;
+}
+.skills_table td, th {
+    border-left: 2px dotted #000;
+    border-right: 2px dotted #000;
+    vertical-align: top;
+    padding: 4px 4px 16px 4px;
+}
+.skills_table .btop {
+    border-top: 2px dotted #000;
+}
+.skills_table .nobtop {
+    border-top: none;
+}
+.skills_table .bbottom {
+    border-bottom: 2px dotted #000;
+}
+.ybox {
+    background: #d0e8b1;
+    border-left: 2px dotted #000;
+    border-right: 2px dotted #000;
+    padding: 4px 4px 4px 4px;
+
+}
+.print_button {
+   float: right;
+}
+.return_to_overview_button {
+   float: right;
+}
+
+/* End of section which was a separate file - lib/css/skills.css */
