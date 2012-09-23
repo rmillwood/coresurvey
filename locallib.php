@@ -345,7 +345,7 @@ function coresurvey_debug($object) {
     function coresurvey_update_skill_taken_count($id = 0) {
         global $CFG;
 
-        $sql = sprintf("UPDATE " . "coresurveyskill SET taken = taken + 1 WHERE id = %d", intval($id));
+        $sql = sprintf("UPDATE " . "{coresurveyskill} SET taken = taken + 1 WHERE id = %d", intval($id));
         CoreDBWrapper::run_sql($sql);
     } //end function
 
@@ -357,7 +357,7 @@ function coresurvey_debug($object) {
     function coresurvey_update_role_taken_count($id = 0) {
         global $CFG;
 
-        $sql = sprintf("UPDATE " . "coresurveyrole SET taken = taken + 1 WHERE id = %d", intval($id));
+        $sql = sprintf("UPDATE " . "{coresurveyrole} SET taken = taken + 1 WHERE id = %d", intval($id));
         CoreDBWrapper::run_sql($sql);
     } //end function
 

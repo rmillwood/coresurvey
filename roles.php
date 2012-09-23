@@ -59,18 +59,17 @@ $PAGE->set_heading(format_string($course->fullname));
 
      $survey_instructions = isset($survey->matrix['instructions']['role_summary']) ? $survey->matrix['instructions']['role_summary'] : 'Instructions';
 
-//     echo '<pre>';
-//     print_r($survey);
-//     exit;
-
      // need to load in jquery ui for the slider......
-     $core_page->addBody('<script type="text/javascript" src="' . $CFG->wwwroot . '/mod/coresurvey/lib/jquery.ui/js/ui.core.js"></script>');
-     $core_page->addBody('<script type="text/javascript" src="' . $CFG->wwwroot . '/mod/coresurvey/lib/jquery.ui/js/ui.slider.js"></script>');
+     //OLD WAY $core_page->addBody('<script type="text/javascript" src="' . $CFG->wwwroot . '/mod/coresurvey/lib/jquery.ui/js/ui.core.js"></script>');
+     $PAGE->requires->js('/mod/coresurvey/lib/jquery.ui/js/ui.core.js');
+     //OLD WAY $core_page->addBody('<script type="text/javascript" src="' . $CFG->wwwroot . '/mod/coresurvey/lib/jquery.ui/js/ui.slider.js"></script>');
+     $PAGE->requires->js('/mod/coresurvey/lib/jquery.ui/js/ui.slider.js');
      $core_page->addHead('<link rel="stylesheet" type="text/css" href="' . $CFG->wwwroot . '/mod/coresurvey/lib/jquery.ui.1.8.7/south-street/jquery-ui-1.8.7.custom.css"/>');
 
-
      // load in survey JS
-     $core_page->addBody('<script type="text/javascript" src="' . $CFG->wwwroot . '/mod/coresurvey/lib/js/public_survey.js"></script>');
+     //OLD WAY $core_page->addBody('<script type="text/javascript" src="' . $CFG->wwwroot . '/mod/coresurvey/lib/js/public_survey.js"></script>');
+     $PAGE->requires->js('/mod/coresurvey/lib/js/public_survey.js');
+
      echo $OUTPUT->header();
 
 ?>

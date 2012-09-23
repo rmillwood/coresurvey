@@ -18,17 +18,20 @@ class PublicPage {
      */
 
     public function PublicPage($CFG = '') {
+        global $PAGE;
         // create the root directory, using Moodle CFG, or hack with $_SERVER
         $this->base_dir = $CFG != '' ? $CFG->dirroot : $_SERVER['DOCUMENT_ROOT'];
         $this->base_url = $CFG != '' ? $CFG->wwwroot : 'http://' . $_SERVER['HTTP_HOST'];
 
-        
+
         // now add the files
         // add jquery
-        $this->addHead('<link rel="stylesheet" type="text/css" href="' . $this->base_url . '/mod/coresurvey/lib/css/core.css">');
-        $this->addHead('<link rel="stylesheet" type="text/css" href="' . $this->base_url . '/mod/coresurvey/lib/css/public_survey.css">');
-        $this->addHead('<script type="text/javascript" src="' .$this->base_url . '/mod/coresurvey/lib/js/jquery-1.3.2.min.js"></script>');
-        $this->addHead('<script type="text/javascript" src="' . $this->base_url . '/mod/coresurvey/lib/js/jquery.tools.min.js"></script>');
+        //$this->addHead('<link rel="stylesheet" type="text/css" href="' . $this->base_url . '/mod/coresurvey/lib/css/core.css">');
+        //$this->addHead('<link rel="stylesheet" type="text/css" href="' . $this->base_url . '/mod/coresurvey/lib/css/public_survey.css">');
+        //OLD WAY $this->addHead('<script type="text/javascript" src="' .$this->base_url . '/mod/coresurvey/lib/js/jquery-1.3.2.min.js"></script>');
+     $PAGE->requires->js('/mod/coresurvey/lib/js/jquery-1.3.2.min.js', true);
+        //OLD WAY $this->addHead('<script type="text/javascript" src="' . $this->base_url . '/mod/coresurvey/lib/js/jquery.tools.min.js"></script>');
+     $PAGE->requires->js('/mod/coresurvey/lib/js/jquery.tools.min.js', true);
 
     } // end constructor
 

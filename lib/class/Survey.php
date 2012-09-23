@@ -1,5 +1,5 @@
 <?php
-/* 
+/*
  * Base Survey class, Roles and Skills extend this....
  */
 
@@ -64,7 +64,7 @@ class Survey extends DBhandler {
 	);
 
         // loop through all of the roles and color
-	
+
         foreach ($this->data AS $k => $v) {
             $arr[$k]['title']	    = $v['name'];
 	    $arr[$k]['key']	    = $k;
@@ -101,7 +101,7 @@ class Survey extends DBhandler {
             if (!isset($tmp[$v['value']])) {
                 // it does not exist and can be added
                 $tmp[$v['value']] = $v;
-		
+
             } else {
                 // we need to create a new key
                 $key = $v['value'];
@@ -170,7 +170,7 @@ class Survey extends DBhandler {
 	echo '<pre>';
 	print_r($this->analysis);
 	exit;*/
-	
+
 
 	// ok now we loop throught the results and find out the ones that match
 
@@ -180,7 +180,7 @@ class Survey extends DBhandler {
      * creates a summary of the analysis for embedding inside the page
      */
 
-    public function analysis_summary() {	
+    public function analysis_summary() {
 	$s = '';
 	$s = '<!-- Survey Data Summary' ."\n";
 	//$s .= '<pre>';
@@ -210,7 +210,7 @@ class Survey extends DBhandler {
 	    $s .= 'Role: ' . $data['title'] . ' scored ' . $data['value'] . ' out of ' . $data['total'] . '. Percentage: ' . $data['percentage'] . '%' . "\n";
 	}
 
-	$s  .=	'End of summary --->' . "\n";
+	$s  .=	'End of summary -->' . "\n";
 	//$s .= '</pre>';
 
 	return $s;
@@ -252,7 +252,7 @@ class Survey extends DBhandler {
                 // adds the weigthing plus the answer....
                 if ($wval > 0) {
                     $arr[$wkey]['value'] = $arr[$wkey]['value'] + $wval + $rval['answer'];
-                    
+
                 }
 
             }
@@ -285,9 +285,9 @@ class Survey extends DBhandler {
             $tot_results += $v['value'];
         }
 
-        
 
-        
+
+
         // now find out the total results and add as a percentage
         foreach ($tmp as $key => $val) {
             $tmp[$key]['percentage'] = round(($val['value'] / $tot_results) * 100, 2);
@@ -353,7 +353,7 @@ class Survey extends DBhandler {
         //exit;
 
         //coresurvey_debug($xml);
-        
+
 
         $s .=   '<script type="text/javascript">
                     $(document).ready(function() {
@@ -369,13 +369,13 @@ class Survey extends DBhandler {
         return $s;
     } // end function
 
-     
+
     /**
      * returns the number of times taken
      */
 
     function reportTaken() {
-        
+
         return $this->taken;
     }
 
@@ -442,7 +442,7 @@ class Survey extends DBhandler {
             require_once($CFG->dirroot . '/mod/coresurvey/lib/class/RoleResult.php');
             $r = new RoleResult();
         }
-        
+
          $r->load(intval($id));
 
          // lets do a very rough security check, if the id from the survey matches the current m_id
@@ -687,7 +687,7 @@ class Survey extends DBhandler {
              case 100:
                  return $this->alignment[4];
          }
-        
+
      } // end function
 
      /**
@@ -764,13 +764,13 @@ class Survey extends DBhandler {
                                 ' . $this->data[$this->results[$i]['role']]['aspects'][$this->results[$i]['aspect']]['title'] . '
                             </dt>' . "\n";
 
-                     
+
 
                      $j .= 'CreateSliderFinished("' . $this->results[$i]['idx'] . '", ' . $answer . ');' . "\n";
 
                      // create the statements, at the moment, these are hardcoded... yuck!!!
                      $s .=  '<dd class="w35 fright dpad">
-				
+
                                 <div id="statement_container_' . $this->results[$i]['idx'] . '">
                                     <div id="statement_' . $this->results[$i]['idx'] . '_0" class="align_statement">
                                         "' . $this->data[$this->results[$i]['role']]['aspects'][$this->results[$i]['aspect']]['alignment'][0] . '"
@@ -791,7 +791,7 @@ class Survey extends DBhandler {
                             </dd>
 							<dd class="fclear"></dd>';
 
-                     
+
 
                      // end the dl
                      $s .=  '</dl>

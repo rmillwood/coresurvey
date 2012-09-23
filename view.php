@@ -1,4 +1,4 @@
-<?php // View the overview page with instructions, surveys paused and completed
+<?php // The overview page with instructions, surveys paused and completed
 
 require_once(dirname(dirname(dirname(__FILE__))).'/config.php');
 require_once(dirname(__FILE__).'/lib.php');
@@ -31,28 +31,28 @@ $PAGE->set_heading(format_string($course->fullname));
 
 /**
  * CoreSurvey Stuff
- */
+*/
 // Now add in our bootstrap file to load in core classes.
-     require_once($CFG->dirroot . '/mod/coresurvey/bootstrap/public.php');
+require_once($CFG->dirroot . '/mod/coresurvey/bootstrap/public.php');
 
-      // include the classes needed
-     require_once($CFG->dirroot . '/mod/coresurvey/lib/class/DBhandler.php');
-     require_once($CFG->dirroot . '/mod/coresurvey/lib/class/Survey.php');
-     require_once($CFG->dirroot . '/mod/coresurvey/lib/class/PublicRoleSurvey.php');
-     require_once($CFG->dirroot . '/mod/coresurvey/lib/class/PublicSkillSurvey.php');
-     require_once($CFG->dirroot . '/mod/coresurvey/lib/class/Result.php');
-     require_once($CFG->dirroot . '/mod/coresurvey/lib/class/RoleResult.php');
-     require_once($CFG->dirroot . '/mod/coresurvey/lib/class/SkillResult.php');
-     require_once($CFG->dirroot . '/mod/coresurvey/lib/class/RoleSurvey.php');
+// include the classes needed
+require_once($CFG->dirroot . '/mod/coresurvey/lib/class/DBhandler.php');
+require_once($CFG->dirroot . '/mod/coresurvey/lib/class/Survey.php');
+require_once($CFG->dirroot . '/mod/coresurvey/lib/class/PublicRoleSurvey.php');
+require_once($CFG->dirroot . '/mod/coresurvey/lib/class/PublicSkillSurvey.php');
+require_once($CFG->dirroot . '/mod/coresurvey/lib/class/Result.php');
+require_once($CFG->dirroot . '/mod/coresurvey/lib/class/RoleResult.php');
+require_once($CFG->dirroot . '/mod/coresurvey/lib/class/SkillResult.php');
+require_once($CFG->dirroot . '/mod/coresurvey/lib/class/RoleSurvey.php');
 
-     // get any saved surveys
-     $rdata = PublicRoleSurvey::fetchMemberSurveys();
-     $sdata = PublicSkillSurvey::fetchMemberSurveys();
+// get any saved surveys
+$rdata = PublicRoleSurvey::fetchMemberSurveys();
+$sdata = PublicSkillSurvey::fetchMemberSurveys();
 
-     // need to get a list of all of the Assessments available
-     $ca = PublicSkillSurvey::fetchallcompetencytypes();
+// need to get a list of all of the Assessments available
+$ca = PublicSkillSurvey::fetchallcompetencytypes();
 
-     $survey = new RoleSurvey(true);
+$survey = new RoleSurvey(true);
 
 
 
@@ -62,36 +62,35 @@ echo $OUTPUT->header();
 echo $OUTPUT->heading($textr->get_data(1));
 ?>
 <div id="content">
-		<div class="dpad">
-		    <?php echo $survey->matrix['instructions']['instructions']; ?>
-		</div>
-                <dl>
-                    <dd class="w45 fleft">
-                        <div>
-				<form action="<?php echo $CFG->wwwroot; ?>/mod/coresurvey/roles.php" method="GET">
-				    <button type="submit"><?php echo $textr->get_data(2); ?></button>
-				    <input type="hidden" name="id" value="<?php echo $_GET['id']; ?>">
-                                </form>
-                            <?php
-                                echo $rdata['html'];
-                            ?>
-                        </div>
-                    </dd>
-                    <dd class="w45 fright">
-                        <div>
-                            <?php echo $ca; ?>
-                            <?php
-                                echo $sdata['html'];
-                            ?>
-                        </div>
-                    </dd>
-                </dl>
-		<div class="fclear tright dpad">
-		    <a href="<?php echo $CFG->wwwroot; ?>/course/view.php?id=<?php echo $course->id; ?>">
-			<button type="button">Quit</button>
-		    </a>
-		</div>
-            </div>
+    <div id="instructions">
+        <?php echo $survey->matrix['instructions']['instructions']; ?>
+    </div>
+
+    <div id="roleAnalysisList">
+        <form
+            action="<?php echo $CFG->wwwroot; ?>/mod/coresurvey/roles.php"
+            method="GET">
+            <button type="submit">
+                <?php echo $textr->get_data(2); ?>
+            </button>
+            <input type="hidden" name="id"
+                value="<?php echo $_GET['id']; ?>">
+        </form>
+        <?php echo $rdata['html']; ?>
+    </div>
+
+    <div id="competencyAssessmentList">
+        <?php echo $ca; ?>
+        <?php echo $sdata['html']; ?>
+    </div>
+
+    <div id="quitbutton">
+        <a href="<?php echo $CFG->wwwroot; ?>/course/view.php?id=<?php echo $course->id; ?>">
+            <button type="button">Quit</button>
+        </a>
+    </div>
+</div>
+
 <?php
 // javascript
 $core_page->displayJavascript();

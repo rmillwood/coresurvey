@@ -1,5 +1,5 @@
 <?php
-/* 
+/*
  * Core result class, can me Roles or Skills based depending on the
  * extended class
  *
@@ -44,7 +44,7 @@ class Result extends DBhandler {
     }
 
     public function setEndDate() {
-        $this->end_date = date("Y-m-d H:i:s");
+        $this->end_date = time();
     }
 
     /**
