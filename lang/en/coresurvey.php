@@ -15,4 +15,6 @@ $string['coresurvey_title_activities']						= "Activity";
 $string['coresurvey_title_alignment']						= "Attitude";
 $string['coresurvey_title_statement']						= "You might think:";
 
+
+$string['coresurvey:addinstance'] = 'Add a new analysis of roles and assessment of competencies';
 ?>

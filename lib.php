@@ -26,17 +26,19 @@ define('CORESURVEY_INCLUDE_TEST', 1);
 
 $coresurvey_EXAMPLE_CONSTANT = 42;     /// for example
 
-
 /**
+ * Saves a new instance of the coresurvey into the database
+ *
  * Given an object containing all the necessary data,
  * (defined by the form in mod_form.php) this function
  * will create a new instance and return the id number
  * of the new instance.
  *
  * @param object $coresurvey An object from the form in mod_form.php
+ * @param mod_coresurvey_mod_form $mform
  * @return int The id of the newly inserted coresurvey record
  */
-function coresurvey_add_instance($coresurvey) {
+function coresurvey_add_instance(stdClass $coresurvey, mod_coresurvey_mod_form $mform = null) {
     global $DB;
 
     $coresurvey->timecreated = time();
@@ -46,16 +48,18 @@ function coresurvey_add_instance($coresurvey) {
     return $DB->insert_record('coresurvey', $coresurvey);
 }
 
-
 /**
+ * Updates an instance of the coresurvey in the database
+ *
  * Given an object containing all the necessary data,
  * (defined by the form in mod_form.php) this function
  * will update an existing instance with new data.
  *
  * @param object $coresurvey An object from the form in mod_form.php
+ * @param mod_coresurvey_mod_form $mform
  * @return boolean Success/Fail
  */
-function coresurvey_update_instance($coresurvey) {
+function coresurvey_update_instance(stdClass $coresurvey, mod_coresurvey_mod_form $mform = null) {
     global $DB;
 
     $coresurvey->timemodified = time();
@@ -66,8 +70,9 @@ function coresurvey_update_instance($coresurvey) {
     return $DB->update_record('coresurvey', $coresurvey);
 }
 
-
 /**
+ * Removes an instance of the coresurvey from the database
+ *
  * Given an ID of an instance of this module,
  * this function will permanently delete the instance
  * and any data that depends on it.
@@ -78,21 +83,16 @@ function coresurvey_update_instance($coresurvey) {
 function coresurvey_delete_instance($id) {
     global $DB;
 
-    if (! $coresurvey = $DB->get_record('coresurvey', 'id', $id)) {
+    if (! $coresurvey = $DB->get_record('coresurvey', array('id' => $id))) {
         return false;
     }
 
-    $result = true;
-
     # Delete any dependent records here #
 
-    if (! $DB->delete_records('coresurvey', 'id', $coresurvey->id)) {
-        $result = false;
-    }
+    $DB->delete_records('coresurvey', array('id' => $coresurvey->id));
 
-    return $result;
+    return true;
 }
-
 
 /**
  * Return a small object with summary information about what a
@@ -105,7 +105,10 @@ function coresurvey_delete_instance($id) {
  * @todo Finish documenting this function
  */
 function coresurvey_user_outline($course, $user, $mod, $coresurvey) {
-    return $return;
+    $summary = new stdClass();
+    $summary->time = 0;
+    $summary->info = 'analysed roles and/or assessed comptencies';
+    return $summary;
 }
 
 
@@ -229,7 +232,7 @@ function coresurvey_uninstall() {
 /// starts with coresurvey_
 /// Remember (see note in first lines) that, if this section grows, it's HIGHLY
 /// recommended to move all funcions below to a new "localib.php" file.
-
 require_once("$CFG->dirroot/mod/coresurvey/locallib.php");
+
 
 ?>

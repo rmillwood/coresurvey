@@ -143,7 +143,7 @@
             if ($model) {
                 $this->id = $model->id;
                 $this->data = $this->deCompress($model->skilldata);
-		$this->matrix = $this->deCompress($model->matrix);
+		        $this->matrix = $this->deCompress($model->matrix);
 
             }
          } // end function
@@ -848,7 +848,7 @@
 	 */
 
 	public function tabulate($name) {
-	    global $CFG, $USER, $textr;
+	    global $CFG, $OUTPUT, $USER, $textr;
 	    // start the table
 	    $s = '<table class="skills_table">';
 
@@ -859,7 +859,7 @@
 			    	<img src="' . $CFG->wwwroot . '/mod/coresurvey/images/macmillan_logo_small.jpg' . '">
 			    </td>
 			    <td class="w25 tleft">
-					' . print_user_picture($USER, 0, $USER->picture, true, true, false) . '
+					' . $OUTPUT->user_picture($USER, array()) . '
 					' . $textr->get_data(15, null, $this->member_survey->end_date) . '
 			    </td>
 			    <td class="w50 tleft">
@@ -1027,7 +1027,7 @@
 	    foreach ($this->member_survey->results as $key => $val) {
 		if ($percent == $val['answer']) {
 
-		    $idx = split('_', $val['idx']);
+		    $idx = explode('_', $val['idx']);
 		    //print_r($idx);
 		    $role = $idx[0];
 		    $aspect = $idx[1];

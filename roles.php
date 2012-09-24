@@ -18,7 +18,6 @@ if ($id) {
     error('You must specify a course_module ID or an instance ID');
 }
 
-
 require_login($course, true, $cm);
 
 add_to_log($course->id, "coresurvey", "view", "view.php?id=$cm->id", "$coresurvey->id");
@@ -28,66 +27,58 @@ $PAGE->set_url('/mod/coresurvey/view.php', array('id' => $cm->id));
 $PAGE->set_title(format_string($coresurvey->name));
 $PAGE->set_heading(format_string($course->fullname));
 
-/**
- * CoreSurvey Stuff
- */
+//CoreSurvey Stuff
+
 // Now add in our bootstrap file to load in core classes.
-     require_once($CFG->dirroot . '/mod/coresurvey/bootstrap/public.php');
-     // include the classes needed
-     require_once($CFG->dirroot . '/mod/coresurvey/lib/class/DBhandler.php');
-     require_once($CFG->dirroot . '/mod/coresurvey/lib/class/Survey.php');
-     require_once($CFG->dirroot . '/mod/coresurvey/lib/class/PublicRoleSurvey.php');
+require_once($CFG->dirroot . '/mod/coresurvey/bootstrap/public.php');
 
-     // stupid hack so that the session / survey can be reset
-    if (isset($_POST['reset']) && $_POST['reset'] == 1) {
-            unset($_SESSION['role_coresurvey']);
-    }
+// include the classes needed
+require_once($CFG->dirroot . '/mod/coresurvey/lib/class/DBhandler.php');
+require_once($CFG->dirroot . '/mod/coresurvey/lib/class/Survey.php');
+require_once($CFG->dirroot . '/mod/coresurvey/lib/class/PublicRoleSurvey.php');
 
-    $survey = new PublicRoleSurvey();
+// stupid hack so that the session / survey can be reset
+if (isset($_POST['reset']) && $_POST['reset'] == 1) {
+    unset($_SESSION['role_coresurvey']);
+}
 
-    // if the survey has been taken, we need to redirect to the results page...
-    if ($survey->surveyTaken()) {
-        // store the results in the session
+$survey = new PublicRoleSurvey();
 
-        $survey->storeSession();
-        coresurvey_page_redirect('role_results.php?id=' . $cm->id . '&s=' . $survey->new_member_result_id);
-    }
+// if the survey has been taken, we need to redirect to the results page...
+if ($survey->surveyTaken()) {
+    // store the results in the session
+    $survey->storeSession();
+    coresurvey_page_redirect('role_results.php?id=' . $cm->id . '&s=' . $survey->new_member_result_id);
+}
 
-    $data = $survey->showSurvey();
+$data = $survey->showSurvey();
 
-     $core_page->addBody($survey->createJavaAlignment());
+$core_page->addBody($survey->createJavaAlignment());
 
-     $survey_instructions = isset($survey->matrix['instructions']['role_summary']) ? $survey->matrix['instructions']['role_summary'] : 'Instructions';
+$survey_instructions = isset($survey->matrix['instructions']['role_summary']) ? $survey->matrix['instructions']['role_summary'] : 'Instructions';
 
-     // need to load in jquery ui for the slider......
-     //OLD WAY $core_page->addBody('<script type="text/javascript" src="' . $CFG->wwwroot . '/mod/coresurvey/lib/jquery.ui/js/ui.core.js"></script>');
-     $PAGE->requires->js('/mod/coresurvey/lib/jquery.ui/js/ui.core.js');
-     //OLD WAY $core_page->addBody('<script type="text/javascript" src="' . $CFG->wwwroot . '/mod/coresurvey/lib/jquery.ui/js/ui.slider.js"></script>');
-     $PAGE->requires->js('/mod/coresurvey/lib/jquery.ui/js/ui.slider.js');
-     $core_page->addHead('<link rel="stylesheet" type="text/css" href="' . $CFG->wwwroot . '/mod/coresurvey/lib/jquery.ui.1.8.7/south-street/jquery-ui-1.8.7.custom.css"/>');
+// need to load in jquery ui for the slider......
+$PAGE->requires->js('/mod/coresurvey/lib/jquery.ui/js/ui.core.js');
+$PAGE->requires->js('/mod/coresurvey/lib/jquery.ui/js/ui.slider.js');
+$core_page->addHead('<link rel="stylesheet" type="text/css" href="' . $CFG->wwwroot . '/mod/coresurvey/lib/jquery.ui.1.8.7/south-street/jquery-ui-1.8.7.custom.css"/>');
 
-     // load in survey JS
-     //OLD WAY $core_page->addBody('<script type="text/javascript" src="' . $CFG->wwwroot . '/mod/coresurvey/lib/js/public_survey.js"></script>');
-     $PAGE->requires->js('/mod/coresurvey/lib/js/public_survey.js');
+// load in survey JS
+$PAGE->requires->js('/mod/coresurvey/lib/js/public_survey.js');
 
-     echo $OUTPUT->header();
+echo $OUTPUT->header();
 
 ?>
+
 <div>
-    <h1>
-        <?php echo $textr->get_data(2); ?>
-    </h1>
-    <p class="dpad">
-        <?php echo $survey_instructions; ?>
-    </p>
+    <h1><?php echo $textr->get_data(2); ?></h1>
+    <p><?php echo $survey_instructions; ?></p>
     <?php echo $data; ?>
 </div>
+
 <?php
-    echo "<!-- START: Body Files -->";
-    echo $core_page->displayBody();
-    echo "<!-- END: Body Files -->";
-    // javascript
-   //$core_page->displayJavascript();
+echo "<!-- START: Body Files -->";
+echo $core_page->displayBody();
+echo "<!-- END: Body Files -->";
 
 /// Finish the page
 echo $OUTPUT->footer();

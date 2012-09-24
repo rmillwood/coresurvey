@@ -1,7 +1,4 @@
-<?php
-/**
- * Role Survey class that displays public code
- */
+<?php //Role Survey class that displays public code
 
 class PublicRoleSurvey extends Survey {
     protected $type = 'Role';
@@ -13,25 +10,11 @@ class PublicRoleSurvey extends Survey {
     protected $survey_taken = false; // boolean for setting whether the survey has been taken or not...
     protected $graph_settings = array();
     protected $analysis;
-
     protected $fudge = 20;
-
     public $new_member_result_id;
-
-
     public $member_survey; // a members object
 
     // the alignments
-    /*
-    protected $alignment = array(
-                            0 => 'I really like to',
-                            1 => 'I feel ready to',
-                            2 => 'I have no preference to',
-                            3 => 'I feel unready to',
-                            4 => 'I really don\'t like to'
-    );
-    */
-
     protected $alignment = array(
                             0 => 'I really don\'t like to',
                             1 => 'I feel unready to',
@@ -48,10 +31,7 @@ class PublicRoleSurvey extends Survey {
     );
 
 
-    /**
-     * Constructor
-    */
-
+    //Constructor
     function __construct($public = false) {
         // if Public then change the directory to public instead of simulate
         if ($public) {
