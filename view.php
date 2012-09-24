@@ -68,7 +68,7 @@ echo $OUTPUT->heading($textr->get_data(1));
 
     <div id="roleAnalysisList">
         <form
-            action="<?php echo $CFG->wwwroot; ?>/mod/coresurvey/roles.php"
+            action="<?php echo $CFG->wwwroot; ?>/mod/coresurvey/role_analysis.php"
             method="GET">
             <button type="submit">
                 <?php echo $textr->get_data(2); ?>

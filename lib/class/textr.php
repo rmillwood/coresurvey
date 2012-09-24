@@ -87,7 +87,7 @@ class textr {
 
 	// date
 	if (! is_null($date)) {
-	    $txt = str_replace('!##date##!', date("H:i" , strtotime($date)) . ' on ' . date("jS M Y" , strtotime($date)), $txt);
+	    $txt = str_replace('!##date##!', date("H:i" , $date) . ' on ' . date("jS M Y" , $date), $txt);
 	}
 
 	return $txt;

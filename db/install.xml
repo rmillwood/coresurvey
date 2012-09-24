@@ -73,8 +73,8 @@
 	    <FIELD NAME="m_id" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="id" NEXT="survey_id"/>
 	    <FIELD NAME="survey_id" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="m_id" NEXT="completed"/>
 	    <FIELD NAME="completed" TYPE="int" LENGTH="4" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="survey_id" NEXT="start_date"/>
-	    <FIELD NAME="start_date" TYPE="datetime" NOTNULL="true" SEQUENCE="false" PREVIOUS="completed" NEXT="end_date"/>
-	    <FIELD NAME="end_date" TYPE="datetime" NOTNULL="true" SEQUENCE="false" PREVIOUS="start_date" NEXT="results"/>
+	    <FIELD NAME="start_date" TYPE="int" LENGTH="11" NOTNULL="true" SEQUENCE="false" PREVIOUS="completed" NEXT="end_date"/>
+	    <FIELD NAME="end_date" TYPE="int" LENGTH="11" NOTNULL="true" SEQUENCE="false" PREVIOUS="start_date" NEXT="results"/>
 	    <FIELD NAME="results" TYPE="text" LENGTH="big" NOTNULL="true" SEQUENCE="false" PREVIOUS="end_date"/>
 	</FIELDS>
 	<KEYS>
@@ -92,8 +92,8 @@
 	    <FIELD NAME="m_id" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="id" NEXT="survey_id"/>
 	    <FIELD NAME="survey_id" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="m_id" NEXT="completed"/>
 	    <FIELD NAME="completed" TYPE="int" LENGTH="4" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="survey_id" NEXT="start_date"/>
-	    <FIELD NAME="start_date" TYPE="datetime" NOTNULL="true" SEQUENCE="false" PREVIOUS="completed" NEXT="end_date"/>
-	    <FIELD NAME="end_date" TYPE="datetime" NOTNULL="true" SEQUENCE="false" PREVIOUS="start_date" NEXT="results"/>
+	    <FIELD NAME="start_date" TYPE="int" LENGTH="11" NOTNULL="true" SEQUENCE="false" PREVIOUS="completed" NEXT="end_date"/>
+	    <FIELD NAME="end_date" TYPE="int" LENGTH="11" NOTNULL="true" SEQUENCE="false" PREVIOUS="start_date" NEXT="results"/>
 	    <FIELD NAME="results" TYPE="text" LENGTH="big" NOTNULL="true" SEQUENCE="false" PREVIOUS="end_date" NEXT="type"/>
 	    <FIELD NAME="type" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="results"/>
 	</FIELDS>

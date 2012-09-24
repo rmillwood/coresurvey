@@ -41,27 +41,27 @@ class Reports {
 
         return $s;
     }
-    
+
     /**
      * does the main report
      */
-    
+
     public function main_report($start, $end) {
 	$s = '';
-	
+
 	// fetch the roles and skills
         $role = new RoleSurvey();
         $skill = new SkillSurvey();
-	
+
 	// fetch all of the role surveys for this period
 	$role->fetch_by_period($start, $end);
 	$skill->fetch_by_period($start, $end);
-	
+
 	// do the title
 	$s .=	'<h1>Macmillan Cancer Support</h1>';
 	$s .=	'<h2>Cancer Voices Learning Needs Tool</h2>';
-	$s .=	'<h3>Report for ' . date('d-m-Y', strtotime($start)) . ' to ' . date('d-m-Y', strtotime($end)) . '</h3>';
-	
+	$s .=	'<h3>Report for ' . date('d-m-Y', $start) . ' to ' . date('d-m-Y', $end) . '</h3>';
+
 	// role analysis
 	$s .=	'<table class="w90 fcenter">';
 	$s .=	'<tr>
@@ -69,7 +69,7 @@ class Reports {
 			<h1>Role Analysis</h1>
 		    </td>
 		</tr>';
-	
+
 	// fetch all of the role surveys for this period
 	$s .=	'<tr>
 		    <td>
@@ -79,7 +79,7 @@ class Reports {
 			' . $role->num_taken() . '
 		    </td>
 		 </tr>';
-	
+
 	// paused
 	$s .=	'<tr>
 		    <td>
@@ -89,7 +89,7 @@ class Reports {
 			' . $role->get_paused() . '
 		    </td>
 		 </tr>';
-	
+
 	// completed
 	$s .=	'<tr>
 		    <td>
@@ -99,11 +99,11 @@ class Reports {
 			' . $role->get_completed() . '
 		    </td>
 		 </tr>';
-	
+
 	// activities
 	$acts = $role->get_activity_proportions();
-	
-	
+
+
 	// only do if not empty
 	if (! empty($acts)) {
 	    // title
@@ -114,7 +114,7 @@ class Reports {
 			    </h1>
 			</td>
 		    </tr>';
-	    
+
 	    foreach($acts as $key => $item) {
 		$s .=	'<tr>
 			    <td>
@@ -123,9 +123,9 @@ class Reports {
 			    <td>
 				' . $this->return_percentage($item['answer'], $item['num']) . '%
 			    </td>
-			</tr>';	
+			</tr>';
 	    }
-	    
+
 	    // do the role summary
 	    $s .=   '<tr>
 			<td colspan="2">
@@ -135,7 +135,7 @@ class Reports {
 			</td>
 		    </tr>';
 	    $r_sum = $this->get_role_totals($role->get_roles_summary(), $acts);
-	    
+
 	    foreach($r_sum as $key => $item) {
 		$s .=	'<tr>
 			    <td>
@@ -147,12 +147,12 @@ class Reports {
 			</tr>';
 	    }
 	} // end acts
-	
+
 	$s .=	'</table>';
-	
+
 	// activities
 	$acts = $skill->get_activity_proportions();
-	
+
 	// Competency assessment
 	$s .=	'<table class="w90 fcenter">';
 	$s .=	'<tr>
@@ -160,7 +160,7 @@ class Reports {
 			<h1>Competency assessment</h1>
 		    </td>
 		</tr>';
-	
+
 	// fetch all of the role surveys for this period
 	$s .=	'<tr>
 		    <td>
@@ -170,7 +170,7 @@ class Reports {
 			' . $skill->num_taken() . '
 		    </td>
 		 </tr>';
-	
+
 	// paused
 	$s .=	'<tr>
 		    <td>
@@ -180,7 +180,7 @@ class Reports {
 			' . $skill->get_paused() . '
 		    </td>
 		 </tr>';
-	
+
 	// completed
 	$s .=	'<tr>
 		    <td>
@@ -190,7 +190,7 @@ class Reports {
 			' . $skill->get_completed() . '
 		    </td>
 		 </tr>';
-	
+
 	// only do if not empty
 	if (! empty($acts)) {
 	    // title
@@ -201,7 +201,7 @@ class Reports {
 			    </h1>
 			</td>
 		    </tr>';
-	    
+
 	    foreach($acts as $key => $item) {
 		$s .=	'<tr>
 			    <td>
@@ -210,9 +210,9 @@ class Reports {
 			    <td>
 				' . $this->return_percentage($item['answer'], $item['num']) . '%
 			    </td>
-			</tr>';	
+			</tr>';
 	    }
-	    
+
 	    // do the role summary
 	    $s .=   '<tr>
 			<td colspan="2">
@@ -222,7 +222,7 @@ class Reports {
 			</td>
 		    </tr>';
 	    $r_sum = $this->get_role_totals($skill->get_skills_summary(), $acts);
-	    
+
 	    foreach($r_sum as $key => $item) {
 		$s .=	'<tr>
 			    <td>
@@ -234,36 +234,36 @@ class Reports {
 			</tr>';
 	    }
 	} // end acts
-	
+
 	$s .=	'</table>';
-	
+
 	return $s;
     } // end
-    
+
     /**
      * produces a role summary
      */
-    
+
     public function get_role_totals($role, $acts) {
-	
+
 	foreach($acts as $key => $item) {
 	    $role[$item['role']]['total'] += $item['answer'];
 	    $role[$item['role']]['num'] += $item['num'];
 	}
-	
+
 	return $role;
-    } // end 
-    
-    
+    } // end
+
+
     /**
      * returns a percentage
      */
-    
+
     private function return_percentage($total, $num) {
 	if ($total == 0 OR $num == 0) {
 	    return 0;
 	}
-	
+
 	return round(($total / $num));
     }
 } // end class

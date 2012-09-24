@@ -68,7 +68,7 @@ $analysis = $survey->tabulate($USER->firstname . ' ' . $USER->lastname);
 
       echo $OUTPUT->header();
 ?>
-<div class="dpad">
+<div>
     <?php echo $analysis; ?>
 </div>
 <div class="return_to_overview_button">

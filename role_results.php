@@ -81,7 +81,7 @@ $PAGE->set_heading(format_string($course->fullname));
 
 
      // do the taken date / time
-     $taken_date = date("H:i" , strtotime($survey->member_survey->end_date)) . ' on ' . date("jS M Y" , strtotime($survey->member_survey->end_date));
+     $taken_date = date("H:i" , $survey->member_survey->end_date) . ' on ' . date("jS M Y" , $survey->member_survey->end_date);
 
       echo $OUTPUT->header();
  ?>

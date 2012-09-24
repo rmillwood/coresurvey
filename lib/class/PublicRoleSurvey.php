@@ -419,7 +419,7 @@ class PublicRoleSurvey extends Survey {
 
             foreach($paused as $key => $val) {
                 $s .=   '<li class="dpad box_border">
-                                        <a href="' . $CFG->wwwroot . '/mod/coresurvey/roles.php?s=' . $val->id . '&id=' . $_GET['id'] . '">
+                                        <a href="' . $CFG->wwwroot . '/mod/coresurvey/role_analysis.php?s=' . $val->id . '&id=' . $_GET['id'] . '">
                                                                 ' . date("H:i", $val->end_date) . ' on ' . date("jS M Y" , $val->end_date) . '
                                                                                         </a>
                                                                                         </li>' . "\n";

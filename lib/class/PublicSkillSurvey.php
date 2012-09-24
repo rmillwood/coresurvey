@@ -656,7 +656,7 @@
              $survey_id = isset($this->member_survey->id) ? $this->member_survey->id : 0;
 
              // now add the submit
-             $s .=  '<div class="fclear"></div>
+             $s .=  '<div id="save_answers_and_view_guidance"></div>
                         <div class="dpad tcenter">
                             <button type="submit" id="submitsurvey">Save answers and view guidance</button>
                             <input type="hidden" name="skillsurvey" id="skillsurveyswitch" value="0"/>
@@ -824,17 +824,19 @@
 
 	    $s .= '<form action="' . $CFG->wwwroot . '/mod/coresurvey/competency_assessment.php" method="GET">
 		    <p>
-		    <button type="submit">' . $textr->get_data(3) . '</button>
-		    <select name="type">' . "\n";
+		    <button type="submit">' . $textr->get_data(3) . '</button><br />';
+		    //<select name="type">' . "\n";
 
 	    foreach ($data as $key => $val) {
-		$s .=	'<option value="' . $key . '">' . $val['name'] . ' abilities</option>' . "\n";
+		//$s .=	'<option value="' . $key . '">' . $val['name'] . ' </option>' . "\n";
+
+	      $s.=  '<input type="radio" name="type" value="' .  $key . '"> to carry out the ' . $val['name'] . ' role<br>';
 	    }
 
 
 	    // finish the form
-	    $s .=  '	</select>
-			</p>
+	    //$s .=  '	</select>
+		$s .= '	</p>
 			<input type="hidden" name="id" value="' . (isset($_GET['id']) ? $_GET['id'] : '0') . '">
 		    </form>' . "\n";
 
@@ -855,25 +857,25 @@
 	    // header
 	    $s .=   '<thead>
 			<tr valign="top">
-			    <td class="w25 tcenter">
+			    <td>
 			    	<img src="' . $CFG->wwwroot . '/mod/coresurvey/images/macmillan_logo_small.jpg' . '">
 			    </td>
-			    <td class="w25 tleft">
+			    <td>
 					' . $OUTPUT->user_picture($USER, array()) . '
 					' . $textr->get_data(15, null, $this->member_survey->end_date) . '
 			    </td>
-			    <td class="w50 tleft">
+			    <td>
 				' . $this->matrix['instructions']['learning_opportunities'] . '
 			    </td>
 		        </tr>
-			<tr class="btop bbottom">
-			    <th class="tcenter ybox">
+			<tr>
+			    <th class="btop">
 				' . $textr->get_data(16) . '
 			    </th>
-			    <th class="tleft ybox">
+			    <th class="btop">
 				' . $textr->get_data(17) . '
 			    </th>
-			    <th class="tleft ybox">
+			    <th class="btop">
 				' . $textr->get_data(18) . '
 			    </th>
 			</tr>
@@ -889,13 +891,13 @@
 		$i = 0;
 		foreach ($dta as $val) {
 		    $s .= '<tr>
-			    <th class="w25 tright ' . ($i == 0 ? 'btop' : 'nobtop') .'">
-				' . ($i == 0 ? 'You have not begun to:' : '') . '
-			    </th>
-			    <td class="w25 btop">
+			    <td class="' . ($i == 0 ? 'btop' : 'nobtop') .'">
+				' . ($i == 0 ? '<strong>You have not begun to:</strong>' : '') . '
+			    </td>
+			    <td class="btop">
 				' . $val['you'] . '
 			    </td>
-			    <td class="w50 tleft btop">
+			    <td class="btop">
 				' . $val['resources'] . '
 			    </td>
 			</tr>';
@@ -910,13 +912,13 @@
 		$i = 0;
 		foreach ($dta as $val) {
 		    $s .= '<tr>
-			    <th class="w25 tright ' . ($i == 0 ? 'btop' : 'nobtop') .'">
-				' . ($i == 0 ? 'You are beginning to:' : '&nbsp;') . '
-			    </th>
-			    <td class="w25 btop">
+			    <td class="' . ($i == 0 ? 'btop' : 'nobtop') .'">
+				' . ($i == 0 ? '<strong>You are beginning to:</strong>' : '&nbsp;') . '
+			    </td>
+			    <td class="btop">
 				' . $val['you'] . '
 			    </td>
-			    <td class="w50 tleft btop">
+			    <td class="btop">
 				' . $val['resources'] . '
 			    </td>
 			</tr>';
@@ -931,13 +933,13 @@
 		$i = 0;
 		foreach ($dta as $val) {
 		    $s .= '<tr>
-			    <th class="w25 tright ' . ($i == 0 ? 'btop' : 'nobtop') .'">
-				' . ($i == 0 ? 'You are still learning to:' : '&nbsp;') . '
-			    </th>
-			    <td class="w25 btop">
+			    <td class="' . ($i == 0 ? 'btop' : 'nobtop') .'">
+				' . ($i == 0 ? '<strong>You are still learning to:</strong>' : '&nbsp;') . '
+			    </td>
+			    <td class="btop">
 				' . $val['you'] . '
 			    </td>
-			    <td class="w50 tleft btop">
+			    <td class="btop">
 				' . $val['resources'] . '
 			    </td>
 			</tr>';
@@ -952,13 +954,13 @@
 		$i = 0;
 		foreach ($dta as $val) {
 		    $s .= '<tr>
-			    <th class="w25 tright ' . ($i == 0 ? 'btop' : 'nobtop') .'">
-				' . ($i == 0 ? 'You are competent to:' : '&nbsp;') . '
-			    </th>
-			    <td class="w25 btop">
+			    <td class=" ' . ($i == 0 ? 'btop' : 'nobtop') .'">
+				' . ($i == 0 ? '<strong>You are competent to:</strong>' : '&nbsp;') . '
+			    </td>
+			    <td class="btop">
 				' . $val['you'] . '
 			    </td>
-			    <td class="w50 tleft ' . ($i == 0 ? 'btop' : 'nobtop') .'">
+			    <td class="' . ($i == 0 ? 'btop' : 'nobtop') .'">
 				' . ($i == 0 ? 'You will become ever more confident through experience.' : '&nbsp;') . '
 			    </td>
 			</tr>';
@@ -975,25 +977,25 @@
 		    // display different for the first row
 		    if ($i == 0) {
 		    $s .= '<tr>
-			    <th class="w25 tright btop">
-				    ' . ($i == 0 ? 'You are confident to:' : '&nbsp;') . '
-			    </th>
-			    <td class="w25 btop">
+			    <td class="btop">
+				    ' . ($i == 0 ? '<strong>You are confident to:</strong>' : '&nbsp;') . '
+			    </td>
+			    <td class="btop">
 				    ' . $val['you'] . '
 			    </td>
-			    <td class="w50 tleft btop">
+			    <td class="btop">
 				    <b>Reading</b><br/>maintain a watching brief on the <a href="http://www.macmillan.org.uk">Macmillan web site</a> for new developments.
 			    </td>
 			   </tr>';
 		    } else {
 		    $s .= '<tr>
-			    <td class="w25 tright nobtop">
+			    <td class="nobtop">
 			            &nbsp;
 				</td>
-				<td class="w25 btop">
+				<td class="btop">
 				    ' . $val['you'] . '
 				</td>
-				<td class="w50 tleft nobtop">
+				<td class="nobtop">
 				    &nbsp;
 				</td>
 			    </tr>';
