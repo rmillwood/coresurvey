@@ -480,7 +480,7 @@ class Survey extends DBhandler {
       * randomises the list each time it's generated
       */
 
-     protected function createQuesionList() {
+     protected function createQuestionList() {
 
          $master = array();
 

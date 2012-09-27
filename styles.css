@@ -1,5 +1,75 @@
 @CHARSET "UTF-8";
 
+/* This section was a separate file - lib/css/tab2.css  */
+ul.regtabs {
+	margin:0 !important; 
+	padding:0;
+        padding-left: 2px;
+	height:30px;
+	border-bottom:1px solid #D7D7D7;	 	
+}
+
+/* single tab */
+ul.regtabs li {
+	float:left;	 
+	padding:0; 
+	margin:0;  
+	list-style-type:none;
+}
+
+/* link inside the tab. uses a background image */
+ul.regtabs a {
+	float:left;
+	font-size:13px;
+	display:block;
+	padding:5px 15px;	
+	text-decoration:none;
+	border:1px solid #D7D7D7;	
+	border-bottom:0px;
+	height:18px;
+	background-color:#00A246;
+	color: #fff;
+	font-weight: bold;
+	margin-right:2px;
+	-moz-border-radius-topleft: 4px;
+	-moz-border-radius-topright:4px;
+	-webkit-border-radius-topleft: 4px;
+	-webkit-border-radius-topright:4px;
+	position:relative;
+	top:1px;	
+}
+
+ul.regtabs a:hover {
+	background-color:#F7F7F7;
+	color: red;
+}
+	
+/* selected tab */
+ul.regtabs a.current {
+	background-color:#fff;
+	border-bottom:2px solid #fff;	
+	color: red;	
+	cursor:default;
+}
+
+	
+/* tab pane */
+div.regpanes {
+	
+	border:1px solid #D7D7D7;
+	border-width:0 1px 1px 1px;
+	min-height:150px;
+	padding:10px;
+	background-color:#fff;
+	-moz-border-radius-bottomleft: 10px;
+	-moz-border-radius-bottomright: 10px;
+	-webkit-border-radius-bottomleft: 10px;
+	-webkit-border-radius-bottomright: 10px;
+}
+
+/* End of section which was a separate file - lib/css/tab2.css  */
+
+
 #roleAnalysisList {
     float: left;
     width: 45%;
@@ -30,6 +100,7 @@
 #surveyform .ui-slider {
 background-color:#CEC;
 border:1px solid #ABA;
+margin:0.5em;
 }
 
 .attitudeandactivityandyoumightthink {
@@ -46,7 +117,7 @@ border:1px solid #ABA;
     border: 3px dotted #0A0;
     background-color:#EFE;
     padding:8px;
-    min-height: 96px;
+    min-height: 5em;
     width: 416px;
     float:left;
     margin-bottom: 12px;
@@ -55,7 +126,9 @@ border:1px solid #ABA;
     float:left;
     width:200px;
     padding-left: 8px;
-    text-align: center;
+    text-align: right;
+    font-style: italic;
+  
 }
 .activity {
    float:right;
@@ -74,13 +147,13 @@ border:1px solid #ABA;
 }
 
 .thought-bubbles {
-}
+ }
 
 .thought-bubble1 {
     float:left;
     height: 10px;
     width: 10px;
-    background-color:#fff;
+    background-color:#F5FAF6;
     border: 2px solid #888;
     border-radius: 24px;
     margin-left: 4px;
@@ -90,7 +163,7 @@ border:1px solid #ABA;
     float:left;
     height: 20px;
     width: 20px;
-    background-color:#fff;
+    background-color:#F5FAF6;
     border: 2px solid #888;
     border-radius: 24px;
     margin-top: 16px;
@@ -99,7 +172,7 @@ border:1px solid #ABA;
 .thought {
     width:200;
     min-height: 40px;
-    background-color:#FFF;
+    background-color:#F5FAF6;
     border: 2px solid #888;
     border-radius: 20px;
     padding: 4px 8px;
@@ -171,7 +244,9 @@ border:1px solid #ABA;
     background-image: url('skillsIcon.gif');
     background-repeat: no-repeat;
     padding-left: 24px;
-}.align_statement {
+}
+
+.align_statement {
     display: none;
 }
 
@@ -254,18 +329,20 @@ border:1px solid #ABA;
     padding: 0px 8px;
 }
 .vertical_question_title {
-    height: 96px;
+    min-height: 96px;
+    border-bottom: 1px dotted #ccc;
 }
 .ui-slider-vertical {
     margin: 0 auto;
     margin-bottom: 10px;
 }
 .vertical_slider_container {
-    border-top: 1px dotted #ccc;
     padding: 8px 8px;
-    height: 175px;
-    vertical-align: middle;
+    height: 125px;
+    width: 2em;
+    margin: 0px auto; 
 }
+    
 .vertical_statements_container {
     min-height: 1px;
     background-color:#FFF;
@@ -815,7 +892,7 @@ button.ui-button::-moz-focus-inner { border: 0; padding: 0; } /* reset extra pad
 .ui-slider .ui-slider-handle { position: absolute; z-index: 2; width: 1.2em; height: 1.2em; cursor: default; }
 .ui-slider .ui-slider-range { position: absolute; z-index: 1; font-size: .7em; display: block; border: 0; background-position: 0 0; }
 
-.ui-slider-horizontal { height: .8em; }
+.ui-slider-horizontal { height: .7em; }
 .ui-slider-horizontal .ui-slider-handle { top: -.3em; margin-left: -.6em; }
 .ui-slider-horizontal .ui-slider-range { top: 0; height: 100%; }
 .ui-slider-horizontal .ui-slider-range-min { left: 0; }

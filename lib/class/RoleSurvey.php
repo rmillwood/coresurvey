@@ -542,250 +542,218 @@ class RoleSurvey extends Survey {
         global $core_page;
         $s = $j = '';
 
-        // if it's empty then return
-        //if (empty($this->roledata)) return;
-
-        //coresurvey_debug($this->roledata);
-
-        // first of all do the tabs
+        // Navigational tabs
         $s = '<ul class="regtabs">' . "\n";
 
-	// we always have the instructions
-	$s .=	'<li>
-		    <a href="#instructions">
-			Instructions
-		    </a>
-		</li>';
+	    // Overview & Role analysis instructions tab
+	    $s .=	'<li><a href="#instructions">Overview & Role analysis instructions</a></li>';
 
-	if (! empty($this->roledata)) {
-	    // loop through all of the tabs
-	    foreach($this->roledata AS $key => $info) {
-		$s .=   '<li><a href="#' . $this->clean($info['name']) . '">' . $info['name'] . '</a></li>';
+        // Role tabs
+	    if (! empty($this->roledata)) {
+	        foreach($this->roledata AS $key => $info) {
+	    	$s .=   '<li><a href="#' . $this->clean($info['name']) . '">' . $info['name'] . '</a></li>';
+	        }
 	    }
-	}
 
-	// threshhold tabs
-	$s .=	'<li>
-		    <a href="#thresholds">
-			Results Matrix
-		    </a>
-		</li>' . "\n";
+	    // Threshold and advisory text tab
+	    $s .= '<li><a href="#thresholds">Threshold and advisory text</a></li>' . "\n";
 
         $s .= '</ul>' . "\n";
 
-        // now create the panes
+        // The panes for each tab
         $s .=   '<div class="regpanes">' . "\n";
 
-	// instructions tabs
-	$s .=	'<div class="tabbkgd">
+	    // Instructions pane
+	    $s .= '<div class="tabbkgd">
 		    <form action="" method="POST">
 			<fieldset class="dpad adminform">
-			    <legend>
-				Survey Instructions
-			    </legend>
-			    <p>
-				Instructions to appear at the top of the Role Survey
-			    </p>
-			    <textarea name="role_summary" id="role_summary">' . (isset($this->matrix['instructions']['role_summary']) ? $this->matrix['instructions']['role_summary'] : '') . '</textarea>
-			    <p>
-				Summary to appear on Role Analysis sumamry
-			    </p>
-			    <textarea name="summary" id="summary">' . (isset($this->matrix['instructions']['summary']) ? $this->matrix['instructions']['summary'] : '') . '</textarea>
 
-			    <input type="hidden" name="warning" id="warning" value="' . (isset($this->matrix['instructions']['warning']) ? $this->matrix['instructions']['warning'] : '') . '">
-			    <p>
-				Instructions
-			    </p>
-			    <textarea name="instructions" id="instructions" class="w95">' . (isset($this->matrix['instructions']['instructions']) ? $this->matrix['instructions']['instructions'] : '') . '</textarea>
-			    <div class="dpad tcenter">
-				<button type="submit">Submit</button>
-				<input type="hidden" value="0" name="edit_instructions">
-			    </div>
+			<legend>Role analysis Instructions</legend>
+
+			<p>Overview Instructions</p>
+			<textarea name="instructions" id="instructions" class="w95">' . (isset($this->matrix['instructions']['instructions']) ? $this->matrix['instructions']['instructions'] : '') . '</textarea>
+
+			<p>Instructions to appear at the top of the Role Analysis</p>
+			<textarea name="role_summary" id="role_summary">' . (isset($this->matrix['instructions']['role_summary']) ? $this->matrix['instructions']['role_summary'] : '') . '</textarea>
+
+			<p>Report to appear on Role Analysis summary</p>
+			<textarea name="summary" id="summary">' . (isset($this->matrix['instructions']['summary']) ? $this->matrix['instructions']['summary'] : '') . '</textarea>
+
+			<input type="hidden" name="warning" id="warning" value="' . (isset($this->matrix['instructions']['warning']) ? $this->matrix['instructions']['warning'] : '') . '">
+
+			<div class="dpad tcenter">
+            <button type="submit">Submit</button>
+			<input type="hidden" value="0" name="edit_instructions">
+			</div>
+
 			</fieldset>
 		    </form>
-		</div>';
+		    </div>';
 
-	$j .= 'CKEDITOR.replace( "summary" );' . "\n";
-	//$j .= 'CKEDITOR.replace( "warning" );' . "\n";
-	$j .= 'CKEDITOR.replace( "instructions" );' . "\n";
+	        $j .= 'CKEDITOR.replace( "summary" );' . "\n";
+        	$j .= 'CKEDITOR.replace( "instructions" );' . "\n";
+	        $j .= 'CKEDITOR.replace( "role_summary" );' . "\n";
 
-	$j .= 'CKEDITOR.replace( "role_summary" );' . "\n";
+	        if (! empty($this->roledata)) {
 
-	if (! empty($this->roledata)) {
+	            foreach($this->roledata AS $key => $info)  {
+		            $s .=   '<div class="tabbkgd">' . "\n";
 
-	    foreach($this->roledata AS $key => $info)  {
-		$s .=   '<div class="tabbkgd">' . "\n";
+		            // add in the edit....
+		            $tmp = $this->DisplayRoleEdit($key);
+		            $s .= $tmp['html'];
+		            $j .= $tmp['java'];
 
-		// add in the edit....
-		$tmp = $this->DisplayRoleEdit($key);
-		$s .= $tmp['html'];
-		$j .= $tmp['java'];
+		           // do the description of the Role
+		           $s .= '<p class="dpad"><span class="colorblock" style="background: ' . $this->roledata[$key]['color'] . '"><b>Color: ' . $this->roledata[$key]['color'] . '</b></span><br/><b>Description: </b>' . $info['description'] . '<br/>
+			              <b>Comment:</b> ' . $info['comment'] . '</p>';
 
-		// do the description of the Role
-		$s .=   '<p class="dpad"><span class="colorblock" style="background: ' . $this->roledata[$key]['color'] . '"><b>Color: ' . $this->roledata[$key]['color'] . '</b></span><br/><b>Description: </b>' . $info['description'] . '<br/>
-			<b>Comment:</b> ' . $info['comment'] . '</p>';
+		           // add the add aspect
+		           $tmp = $this->addAspectForm($key);
+		           $s .=   $tmp['html'];
+		           $j .=   $tmp['java'];
 
-		// add the add aspect
-		$tmp = $this->addAspectForm($key);
-		$s .=   $tmp['html'];
-		$j .=   $tmp['java'];
+		           // display the aspects for this Role
+		           if (! empty($info['aspects'])) {
+		               $tmp = $this->displayAspects($key);
+		               $s .= $tmp['html'];
+		               $j .= $tmp['java'];
+		           } else {
+		               $s .=   '<p class="dpad">There are no Aspects in this Role!</p>';
+		           }
 
-		// display the aspects for this Role
-		if (! empty($info['aspects'])) {
-		    $tmp =   $this->displayAspects($key);
-		    $s .=   $tmp['html'];
-		    $j .=   $tmp['java'];
-		} else {
-		    $s .=   '<p class="dpad">There are no Aspects in this Role!</p>';
-		}
+		           // add the delete button
+		           $s .= '<div class="dpad w20 fright core_error_box">
+			              <form action="" method="POST">
+				          <button type="button" class="core_button button_delete" id="deleterolebutton_' . $key . '">Delete this Role?</button>
+				          <input type="hidden" name="deleterole" value="' . $key . '"/>
+			              </form>
+			              </div>
+			              <div class="fclear"></div>';
+		           // add delete javascript
+		           $j .= '$("#deleterolebutton_' . $key . '").colorbox({width: "80%", height: "80%", iframe: true, Overlayclose: false, href: "' . $core_page->base_url . '/mod/coresurvey/roles_admin/delete-role.php?r=' . $key . '"});';
 
-		// add the delete button
-		$s .=   '<div class="dpad w20 fright core_error_box">
-			    <form action="" method="POST">
-				<button type="button" class="core_button button_delete" id="deleterolebutton_' . $key . '">Delete this Role?</button>
-				<input type="hidden" name="deleterole" value="' . $key . '"/>
-			    </form>
-			</div>
-			<div class="fclear"></div>';
-		// add delete javascript
-		$j .= '$("#deleterolebutton_' . $key . '").colorbox({width: "80%", height: "80%", iframe: true, Overlayclose: false, href: "' . $core_page->base_url . '/mod/coresurvey/roles_admin/delete-role.php?r=' . $key . '"});';
+		           $s .= '</div>' . "\n";
+	            } // end loop
+	        } // end if there are roles
 
-		$s .= '</div>' . "\n";
-	    } // end loop
-	} // end if there are roles
+	        // add the results threshholds
+	        $s .=   '<div class="tabbkgd">' . "\n";
 
-	// add the results threshholds
-	$s .=   '<div class="tabbkgd">' . "\n";
+	        // add the form
+	        $s .= '<form action="" method="POST">
+		           <fieldset class="adminform">
+			       <legend>Threshold Percentages</legend>
 
-	// add the form
-	$s .=	'<form action="" method="POST">
-		    <fieldset class="adminform">
-			<legend>
-			    Thresh Hold Percentages
-			</legend>
-			<label>Match Threshhold</label>
-			<p>
-			    The percentage at which a Result Matches a Role
-			</p>
-			<input type="text" name="match_thresh_hold" id="match_thresh_hold" class="w5" value="' . $this->get_match_thresh_hold() . '">%
-			<label>Separated Threshhold</label>
-			<p>
-			    The percentage at which a Role must be different to count as being separated
-			</p>
-			<input type="text" name="separate_thresh_hold" id="separate_thresh_hold" class="w5" value="' . $this->get_separate_thresh_hold() . '">%
-			<div class="dpad tcenter">
-			    <button type="submit">Submit</button>
-			    <input type="hidden" name="edit_thresh_hold" value="0">
-			</div>
-		    </fieldset>
-		</form>';
+	               <label>Match Threshhold</label>
+			       <p>The percentage at which a Result matches a Role and thus recommend it</p>
+			       <input type="text" name="match_thresh_hold" id="match_thresh_hold" class="w5" value="' . $this->get_match_thresh_hold() . '">%
 
-	// ok add in the tags
-	$s .=	'<form class="dpad" action="" method="POST">
-		    <fieldset class="adminform">
-			<legend>Matrix Tags</legend>
-			<p>
-			    Add your messages into the correct boxes. Use "%1", "%2" etc as a token to be replaced by the Role name / Role name + URL at runtime
-			</p>
-			</hr>';
+			       <label>Separated Threshhold</label>
+			       <p>The percentage at which a Role must be different from another to count as being separated</p>
+			       <input type="text" name="separate_thresh_hold" id="separate_thresh_hold" class="w5" value="' . $this->get_separate_thresh_hold() . '">%
 
-	// we always need to have a M0 or no Roles match
-	$s .=	'<p><b>No Role matches</b></p>
-		<dl class="fclear bpad">
-		    <dd class="fleft tleft w45">
-			<h2>Advice Offered</h2>
-			<textarea name="M0_0_offered" id="M0_0_offered" class="w90">' . (isset($this->matrix['tags']['M0_0_offered']) ? $this->matrix['tags']['M0_0_offered'] : '') . '</textarea>
-		    </dd>
-		    <dd class="fright tleft w45">
-			<h2>Further Advice</h2>
-			<textarea name="M0_0_further" id="M0_0_further" class="w90">' . (isset($this->matrix['tags']['M0_0_further']) ? $this->matrix['tags']['M0_0_further'] : '') . '</textarea>
-		    </dd>
-		</dl>
-		<div class="fclear"></div>';
+			       <div class="dpad tcenter">
+			       <button type="submit">Submit</button>
+			       <input type="hidden" name="edit_thresh_hold" value="0">
+			       </div>
+		           </fieldset>
+		           </form>';
 
-	$s .=	'<p><b>No Role matches but separated</b></p>
-		<dl class="fclear bpad">
-		    <dd class="fleft tleft w45">
-			<h2>Advice Offered</h2>
-			<textarea name="M0_1_offered" id="M0_1_offered" class="w90">' . (isset($this->matrix['tags']['M0_1_offered']) ? $this->matrix['tags']['M0_1_offered'] : '') . '</textarea>
-		    </dd>
-		    <dd class="fright tleft w45">
-			<h2>Further Advice</h2>
-			<textarea name="M0_1_further" id="M0_1_further" class="w90">' . (isset($this->matrix['tags']['M0_1_further']) ? $this->matrix['tags']['M0_1_further'] : '') . '</textarea>
-		    </dd>
-		</dl>
-		<div class="fclear"></div>';
+	        // ok add in the tags
+            $s .= '<form class="dpad" action="" method="POST">
+		           <fieldset class="adminform">
+			       <legend>Matching role advice</legend>
+			       <p>Add your messages into the correct boxes. Use "%1", "%2" etc as a token to be replaced by the Role name / Role name + URL at runtime</p>
+			       </hr>';
 
-	// only do if there is more than one role
-	if (count($this->roledata) > 0) {
-	    for ($n=1; $n <= count($this->roledata); $n++) {
-		// Matches n0n separated
-		$s .=	'<p><b>' . $n . ' Role match</b></p>
-			<dl class="fclear bpad">
-			    <dd class="fleft tleft w45">
-				<h2>Advice Offered</h2>
-				<textarea name="M' . $n . '_0_offered" id="M' . $n . '_0_offered" class="w90">' . (isset($this->matrix['tags']['M' . $n . '_0_offered']) ? $this->matrix['tags']['M' . $n . '_0_offered'] : '') . '</textarea>
-			    </dd>
-			    <dd class="fright tleft w45">
-				<h2>Further Advice</h2>
-				<textarea name="M' . $n . '_0_further" id="M' . $n . '_0_further" class="w90">' . (isset($this->matrix['tags']['M' . $n . '_0_further']) ? $this->matrix['tags']['M' . $n . '_0_further'] : '') . '</textarea>
-			    </dd>
-			</dl>
-			<div class="fclear"></div>';
-		// Matches but separated
-		$s .=	'<p><b>' . $n . ' Role match but Separated</b></p>
-			<dl class="fclear bpad">
-			    <dd class="fleft tleft w45">
-				<h2>Advice Offered</h2>
-				<textarea name="M' . $n . '_1_offered" id="M' . $n . '_1_offered" class="w90">' . (isset($this->matrix['tags']['M' . $n . '_1_offered']) ? $this->matrix['tags']['M' . $n . '_1_offered'] : '') . '</textarea>
-			    </dd>
-			    <dd class="fright tleft w45">
-				<h2>Further Advice</h2>
-				<textarea name="M' . $n . '_1_further" id="M' . $n . '_1_further" class="w90">' . (isset($this->matrix['tags']['M' . $n . '_1_further']) ? $this->matrix['tags']['M' . $n . '_1_further'] : '') . '</textarea>
-			    </dd>
-			</dl>
-			<div class="fclear"></div>';
-	    } // end loop
-	} // end if roles exist
+            // we always need to have a M0 or no Roles match
+	        $s .= '<p><b>No role matches</b></p>
+		           <dl class="fclear bpad">
+		           <dd class="fleft tleft w45">
+			       <h2>Advice offered</h2>
+			       <textarea name="M0_0_offered" id="M0_0_offered" class="w90">' . (isset($this->matrix['tags']['M0_0_offered']) ? $this->matrix['tags']['M0_0_offered'] : '') . '</textarea>
+		           </dd>
+		           <dd class="fright tleft w45">
+			       <h2>Further advice</h2>
+			       <textarea name="M0_0_further" id="M0_0_further" class="w90">' . (isset($this->matrix['tags']['M0_0_further']) ? $this->matrix['tags']['M0_0_further'] : '') . '</textarea>
+		           </dd>
+		           </dl>
+		           <div class="fclear"></div>';
 
-	/*echo '<pre>';
-	print_r($this->roledata);
-	exit;*/
+            $s .= '<p><b>No role matches but separated</b></p>
+		           <dl class="fclear bpad">
+		           <dd class="fleft tleft w45">
+			       <h2>Advice offered</h2>
+			       <textarea name="M0_1_offered" id="M0_1_offered" class="w90">' . (isset($this->matrix['tags']['M0_1_offered']) ? $this->matrix['tags']['M0_1_offered'] : '') . '</textarea>
+		           </dd>
+		           <dd class="fright tleft w45">
+			       <h2>Further advice</h2>
+			       <textarea name="M0_1_further" id="M0_1_further" class="w90">' . (isset($this->matrix['tags']['M0_1_further']) ? $this->matrix['tags']['M0_1_further'] : '') . '</textarea>
+		           </dd>
+		           </dl>
+		           <div class="fclear"></div>';
 
+            // only do if there is more than one role
+	        if (count($this->roledata) > 0) {
+	            for ($n=1; $n <= count($this->roledata); $n++) {
+		            // Matches n0n separated
+		            $s .= '<p><b>' . $n . ' role(s) match</b></p>
+			               <dl class="fclear bpad">
+			               <dd class="fleft tleft w45">
+				           <h2>Advice offered</h2>
+				           <textarea name="M' . $n . '_0_offered" id="M' . $n . '_0_offered" class="w90">' . (isset($this->matrix['tags']['M' . $n . '_0_offered']) ? $this->matrix['tags']['M' . $n . '_0_offered'] : '') . '</textarea>
+			               </dd>
+			               <dd class="fright tleft w45">
+				           <h2>Further advice</h2>
+				           <textarea name="M' . $n . '_0_further" id="M' . $n . '_0_further" class="w90">' . (isset($this->matrix['tags']['M' . $n . '_0_further']) ? $this->matrix['tags']['M' . $n . '_0_further'] : '') . '</textarea>
+			               </dd>
+			               </dl>
+			               <div class="fclear"></div>';
+		            // Matches but separated
+                    $s .=	'<p><b>' . $n . ' role(s) match but separated</b></p>
+			                 <dl class="fclear bpad">
+			                 <dd class="fleft tleft w45">
+				             <h2>Advice offered</h2>
+				             <textarea name="M' . $n . '_1_offered" id="M' . $n . '_1_offered" class="w90">' . (isset($this->matrix['tags']['M' . $n . '_1_offered']) ? $this->matrix['tags']['M' . $n . '_1_offered'] : '') . '</textarea>
+			                 </dd>
+			                 <dd class="fright tleft w45">
+				             <h2>Further advice</h2>
+				             <textarea name="M' . $n . '_1_further" id="M' . $n . '_1_further" class="w90">' . (isset($this->matrix['tags']['M' . $n . '_1_further']) ? $this->matrix['tags']['M' . $n . '_1_further'] : '') . '</textarea>
+			                 </dd>
+			                 </dl>
+			                <div class="fclear"></div>';
+	            } // end loop
+	        } // end if roles exist
 
-	// end tag form
-	$s .=	'	<div class="dpad tcenter">
-			    <button type="submit">Submit</button>
-			    <input type="hidden" value="0" name="edit_matrix">
-			</div>
-		    </fieldset>
-		</form>' . "\n";
+	        // end tag form
+	        $s .= '<div class="dpad tcenter">
+		           <button type="submit">Submit</button>
+			       <input type="hidden" value="0" name="edit_matrix">
+			       </div>
+		           </fieldset>
+		           </form>' . "\n";
+	        // end the matrix tab pane
+	        $s .= '</div>';
 
+            // end the panes
+            $s .= '</div>' . "\n";
 
+            // add the javascript.....
+            $j .= '$("ul.regtabs").tabs("div.regpanes > div").history();';
 
+            // factor javascript
+            $j = '<script type="text/javascript">
+                      $(document).ready(function() {
+                      ' . $j . '
+                      });
+                  </script>' . "\n";
 
-	// end the matrix tab pane
-	$s .=	'</div>';
-
-        // end the panes
-        $s .=   '</div>' . "\n";
-
-        // add the javascript.....
-        $j .= '$("ul.regtabs").tabs("div.regpanes > div").history();';
-
-        // factor javascript
-        $j =    '<script type="text/javascript">
-                    $(document).ready(function() {
-                        ' . $j . '
-                    });
-                </script>' . "\n";
-
-        return $s . $j;
+            return $s . $j;
     } // end function
 
-    /**
-     * displays the html needed to Kill a survey
-     */
+
+    // Displays the html needed to Kill a survey
 
     function KillRoleForm($key) {
 
@@ -863,11 +831,10 @@ class RoleSurvey extends Survey {
         $tmp['java'] = $j;
 
         return $tmp;
-    }
+    } // end function
 
-    /**
-     * Adds the create new aspect form
-     */
+
+    // Adds the create new aspect form
 
     protected function addAspectForm($key) {
         $tmp = array('html' => '', 'java' => '');

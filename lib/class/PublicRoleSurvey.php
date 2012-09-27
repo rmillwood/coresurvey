@@ -195,7 +195,7 @@ class PublicRoleSurvey extends Survey {
         $this->data = $this->deCompress($model->roledata);
         $this->matrix = $this->deCompress($model->matrix);
 
-        $this->results = $this->createQuesionList();
+        $this->results = $this->createQuestionList();
 
         // ok lets load the two arrays into the session, this will minimise
         // db load....:-)
@@ -246,10 +246,8 @@ class PublicRoleSurvey extends Survey {
         // ok create the form
         $s .=  '<form action="" method="POST" id="surveyform">' . "\n";
 
-        // add in the pause button
-        $s .=  '<div class="dpad tcenter box_border">
-                                ' . $textr->get_data(13) . ' <button type="submit">' . $textr->get_data(14) . '</button>
-                                                        </div>';
+        // add in the pause button (disabled because wasn't working!)
+        // $s .=  '<div class="dpad tcenter box_border">' . $textr->get_data(13) . ' <button type="submit">' . $textr->get_data(14) . '</button></div>';
         $s .=  '<fieldset>';
         // headings
         $s.=   '<div class="attitudeandactivityandyoumightthink">
@@ -294,7 +292,7 @@ class PublicRoleSurvey extends Survey {
 
                     // create the slider
                     $s .=  '<div class="attitude">
-                                            <div id="slider_header_' . $this->results[$i]['idx'] . '" class="tright bpad rpad" style="">&nbsp;<span style="display:none;">' . $this->alignment[2] . '</span></div>
+                                            <div id="slider_header_' . $this->results[$i]['idx'] . '" class="attitudeText" style="">&nbsp;<span style="display:none;">' . $this->alignment[2] . '</span></div>
                                                                     <div id="slider_' . $this->results[$i]['idx'] . '" class="w95 ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"></div>
                                                                                             <input type="hidden" name="answer_' . $this->results[$i]['idx'] . '" id="answer_' . $this->results[$i]['idx'] . '" value="' . $answer . '"/>
                                                                                                                     </div>' . "\n";

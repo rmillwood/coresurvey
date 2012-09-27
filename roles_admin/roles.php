@@ -1,15 +1,4 @@
-<?php
-    /**
-     * CORE Survey Tool for MacMillan Cancer Support
-     * CORE Education
-     * http://www.core-ed.net
-     * Author: Nigel Hulls
-     * E-mail: nigel.hulls@core-ed.net
-     */
-
-     // first of all Bootstrap the page using the Moodle config file, this gives
-     // us access to the Moodle db functions, and also some other libraries
-     // that we may want to pull in :-(
+<?php //Administration of role analysis
 
      require_once('../../../config.php');
 
@@ -36,7 +25,7 @@
      $core_page->addJavascript('DoEdits("addrole");');
 
      $addrole = $survey->addForm($core_page);
-     
+
      $showroles = $survey->displayAdmin($core_page);
 
      $data = $survey->displayRolesAdmin();
@@ -56,7 +45,7 @@
 ?>
 <?php require_once($CFG->dirroot . '/mod/coresurvey/template/adminheader.php'); ?>
             <div id="content">
-                <h1>Roles Survey Administration</h1>
+                <h1>Role Analysis Settings</h1>
                 <div class="core_edit_buttons tcenter bpad">
                     <button type="button" class="core_button button_add" id="addrole_button_add">Add a New Role</button>
                     <button type="button" class="core_button core_button_close button_close" id="addrole_button_close">Close Panel</button>

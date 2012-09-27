@@ -525,22 +525,35 @@ class SkillSurvey extends Survey {
         // first of all do the tabs
         $s = '<ul class="regtabs">' . "\n";
 
-        // loop through all of the tabs
+        // Instructions tab
+        $s .=	'<li><a href="#instructions">Instructions & generic learning opportunities</a></li>';
+
+        // Role tabs
         foreach($this->skilldata AS $key => $info) {
             $s .=   '<li><a href="#' . $this->clean($info['name']) . '">' . $info['name'] . '</a></li>';
         }
-
-	// add instructions
-	$s .=	'<li>
-		    <a href="#instructions">
-			Instructions / Matrix
-		    </a>
-		</li>';
 
         $s .= '</ul>' . "\n";
 
         // now create the panes
         $s .=   '<div class="regpanes">' . "\n";
+
+        // instuctions pane
+        $s .= '<div class="tabbkgd">
+		       <form action="" method="POST">
+			   <fieldset class="adminform">
+			   <legend>Edit instructions & generic learning opportunities</legend>
+			   <p>Competency assessment instructions</p>
+			   <textarea name="instructions" class="w95">' . (isset($this->matrix['instructions']['instructions']) ? $this->matrix['instructions']['instructions'] : '') . '</textarea>
+			   <p>Learning Opportunities</p>
+			   <textarea name="Report generic learning_opportunities" class="w95">' . (isset($this->matrix['instructions']['learning_opportunities']) ? $this->matrix['instructions']['learning_opportunities'] : '') . '</textarea>
+			   <div class="dpad tcenter">
+			   <button type="submit">Submit</button>
+			   <input type="hidden" name="edit_instructions" value="0">
+			   </div>
+			   </fieldset>
+		       </form>
+		       </div>';
 
         foreach($this->skilldata AS $key => $info)  {
             $s .=   '<div class="tabbkgd">' . "\n";
@@ -554,7 +567,7 @@ class SkillSurvey extends Survey {
             $s .=   '<p class="dpad"><span class="colorblock" style="background: ' . $this->skilldata[$key]['color'] . '"><b>Color: ' . $this->skilldata[$key]['color'] . '</b></span><br/><b>Description: </b>' . $info['description'] . '<br/>
                     <b>Comment:</b> ' . $info['comment'] . '</p>';
 
-            // add the add aspect
+            // add the aspect
             $tmp = $this->addAspectForm($key);
             $s .=   $tmp['html'];
             $j .=   $tmp['java'];
@@ -582,24 +595,6 @@ class SkillSurvey extends Survey {
             $s .= '</div>' . "\n";
         } // end loop
 
-	// instuctions pane
-	$s .=   '<div class="tabbkgd">
-		    <form action="" method="POST">
-			<fieldset class="adminform">
-			    <legend>
-				Edit Instructions
-			    </legend>
-			    <p>Survey Instructions</p>
-			    <textarea name="instructions" class="w95">' . (isset($this->matrix['instructions']['instructions']) ? $this->matrix['instructions']['instructions'] : '') . '</textarea>
-			    <p>Learning Opportunities</p>
-			    <textarea name="learning_opportunities" class="w95">' . (isset($this->matrix['instructions']['learning_opportunities']) ? $this->matrix['instructions']['learning_opportunities'] : '') . '</textarea>
-			    <div class="dpad tcenter">
-				<button type="submit">Submit</button>
-				<input type="hidden" name="edit_instructions" value="0">
-			    </div>
-			</fieldset>
-		    </form>
-		</div>';
 
 	$j .= 'CKEDITOR.replace( "instructions" );' . "\n";
 	$j .= 'CKEDITOR.replace( "learning_opportunities" );' . "\n";

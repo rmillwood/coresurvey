@@ -254,7 +254,7 @@ class PublicSkillSurvey extends Survey {
         $this->data = $this->deCompress($model->skilldata);
         $this->matrix = $this->deCompress($model->matrix);
 
-        $this->results = $this->createQuesionList();
+        $this->results = $this->createQuestionList();
 
         // ok lets load the two arrays into the session, this will minimise
         // db load....:-)
@@ -551,21 +551,14 @@ class PublicSkillSurvey extends Survey {
         $questions = count($this->results);
         $pages = ceil($questions / $this->questions_per_page);
         $idx = 0; // initial array pointer
-        //coresurvey_debug($this->results);
 
         // ok create the form
         $s .=  '<form action="" method="POST" id="surveyform">' . "\n";
 
-        // add in the pause button
-        $s .=  '<div class="dpad tcenter box_border">
-                                ' . $textr->get_data(9) . ' <button type="submit">' . $textr->get_data(10) . '</button>
-                                                        </div>';
+        // add in the pause button (disabled because it wouldn't work!)
+        // $s .=  '<div class="dpad tcenter box_border">' . $textr->get_data(9) . ' <button type="submit">' . $textr->get_data(10) . '</button></div>';
+        $s .= '<p>' . $this->matrix['instructions']['instructions'] . '</p>';
 
-        //for($pg = 1; $pg <= $pages; $pg++) {
-
-        // create start / end array pointer
-        //$start = ($pg * $this->questions_per_page) - $this->questions_per_page;
-        //$end = ($pg * $this->questions_per_page) - 1;
         $start = 0;
         $end = $questions;
 
@@ -591,43 +584,43 @@ class PublicSkillSurvey extends Survey {
                 // survey, otherwise it will be the result
                 $answer = $this->results[$i]['answer'] == -1 ? 50 : $this->results[$i]['answer'];
 
-                $s .=   '<li>
-                                        <div class="vertical_pad">' . "\n";
+                $s .=   '<li><div class="vertical_pad">' . "\n";
 
                 // do the question title
-                $s .=   '<p class="vertical_question_title">
-                                        ' . $this->data[$this->results[$i]['role']]['aspects'][$this->results[$i]['aspect']]['title'] . '
-                                                                </p>';
+                $s .= '<p class="vertical_question_title">';
+                $s .= $this->data[$this->results[$i]['role']]['aspects'][$this->results[$i]['aspect']]['title'];
+                $s .= '</p>';
 
                 // do the slider
-                $s .=   '<div class="tcenter vertical_slider_container">
-                                        <div id="slider_' . $this->results[$i]['idx'] . '" class="w95 ui-slider ui-slider-vertical ui-widget ui-widget-content ui-corner-all"></div>
+                $s .= '<div class="tcenter vertical_slider_container">';
+                $s .= '<div id="slider_' . $this->results[$i]['idx'] . '" class="w95 ui-slider ui-slider-vertical ui-widget ui-widget-content ui-corner-all">';
+                $s .= '</div>';
 
-                                                                <input type="hidden" name="answer_' . $this->results[$i]['idx'] . '" id="answer_' . $this->results[$i]['idx'] . '" value="' . $answer . '"/>
-                                                                                        </div>   </div>
-                                                                                        <div class="abilities-thought-bubbles"><div class="abilities-thought-bubble1"></div> <div class="abilities-thought-bubble2"></div></div>';
+                $s .= '<input type="hidden" name="answer_' . $this->results[$i]['idx'] . '" id="answer_' . $this->results[$i]['idx'] . '" value="' . $answer . '"/>';
+                $s .= '</div></div>';
+                $s .= '<div class="abilities-thought-bubbles"><div class="abilities-thought-bubble1"></div>';
+                $s .= '<div class="abilities-thought-bubble2"></div></div>';
 
                 // now do the statements
-                $s .=   '<div id="statement_container_' . $this->results[$i]['idx'] . '" class="vertical_statements_container">
-                                        <div id="slider_header_' . $this->results[$i]['idx'] . '" class="slider_header_title tcenter bpad">&nbsp;<span style="display: none;">' . $this->alignment[2] . '</span></div>
-                                                                <div id="statement_' . $this->results[$i]['idx'] . '_0" class="align_statement">
-                                                                                        ' . $this->data[$this->results[$i]['role']]['aspects'][$this->results[$i]['aspect']]['alignment'][4] . '
-                                                                                                                </div>
-                                                                                                                <div id="statement_' . $this->results[$i]['idx'] . '_25" class="align_statement">
-                                                                                                                                        ' . $this->data[$this->results[$i]['role']]['aspects'][$this->results[$i]['aspect']]['alignment'][3] . '
-                                                                                                                                                                </div>
-                                                                                                                                                                <div id="statement_' . $this->results[$i]['idx'] . '_50" class="align_statement">
-                                                                                                                                                                                        ' . $this->data[$this->results[$i]['role']]['aspects'][$this->results[$i]['aspect']]['alignment'][2] . '
-                                                                                                                                                                                                                </div>
-                                                                                                                                                                                                                <div id="statement_' . $this->results[$i]['idx'] . '_75" class="align_statement">
-                                                                                                                                                                                                                                        ' . $this->data[$this->results[$i]['role']]['aspects'][$this->results[$i]['aspect']]['alignment'][1] . '
-                                                                                                                                                                                                                                                                </div>
-                                                                                                                                                                                                                                                                <div id="statement_' . $this->results[$i]['idx'] . '_100" class="align_statement">
-                                                                                                                                                                                                                                                                                        ' . $this->data[$this->results[$i]['role']]['aspects'][$this->results[$i]['aspect']]['alignment'][0] . '
-                                                                                                                                                                                                                                                                                                                </div>
-                                                                                                                                                                                                                                                                                                                <div class="fclear"></div>
-                                                                                                                                                                                                                                                                                                                </div>';
-                // sho differently if paused
+                $s .= '<div id="statement_container_' . $this->results[$i]['idx'] . '" class="vertical_statements_container">';
+                $s .= '<div id="slider_header_' . $this->results[$i]['idx'] . '" class="slider_header_title tcenter bpad">&nbsp;';
+                $s .= '<span style="display: none;">' . $this->alignment[2] . '</span></div>';
+
+                $s .= '<div id="statement_' . $this->results[$i]['idx'] . '_0" class="align_statement">';
+                $s .= $this->data[$this->results[$i]['role']]['aspects'][$this->results[$i]['aspect']]['alignment'][4];
+                $s .= '</div>';
+                $s .= '<div id="statement_' . $this->results[$i]['idx'] . '_25" class="align_statement">';
+                $s .= $this->data[$this->results[$i]['role']]['aspects'][$this->results[$i]['aspect']]['alignment'][3] . '</div>';
+                $s .= '<div id="statement_' . $this->results[$i]['idx'] . '_50" class="align_statement">';
+                $s .= $this->data[$this->results[$i]['role']]['aspects'][$this->results[$i]['aspect']]['alignment'][2] . '</div>';
+                $s .= '<div id="statement_' . $this->results[$i]['idx'] . '_75" class="align_statement">';
+                $s .= $this->data[$this->results[$i]['role']]['aspects'][$this->results[$i]['aspect']]['alignment'][1] . '</div>';
+                $s .= '<div id="statement_' . $this->results[$i]['idx'] . '_100" class="align_statement">';
+                $s .= $this->data[$this->results[$i]['role']]['aspects'][$this->results[$i]['aspect']]['alignment'][0] . '</div>';
+
+                $s .= '</div>';
+
+                // show differently if paused
                 if ($this->paused) {
                     $j .= 'CreateSliderVerticalPaused("' . $this->results[$i]['idx'] . '", ' . $answer . ');' . "\n";
                 } else {
@@ -650,20 +643,19 @@ class PublicSkillSurvey extends Survey {
         // is this a stored paused survey??
         $survey_id = isset($this->member_survey->id) ? $this->member_survey->id : 0;
 
-        // now add the submit
-        $s .=  '<div id="save_answers_and_view_guidance"></div>
-                                <div class="dpad tcenter">
-                                <button type="submit" id="submitsurvey">Save answers and view guidance</button>
-                                <input type="hidden" name="skillsurvey" id="skillsurveyswitch" value="0"/>
-                                <input type="hidden" name="paused" value="' . $survey_id . '"/>
-                                                        <input type="hidden" name="type" value="' . $type . '">
-                                                                                </div>';
+        // Save answers and view Guidance button
+        $s .=  '<div id="save_answers_and_view_guidance">
+                <button type="submit" id="submitsurvey">Save answers and view guidance</button>
+                <input type="hidden" name="skillsurvey" id="skillsurveyswitch" value="0"/>
+                <input type="hidden" name="paused" value="' . $survey_id . '"/>
+                <input type="hidden" name="type" value="' . $type . '">
+                </div>';
 
         // add the submit click to change the rolesurvey key
         $j .=  '$("#submitsurvey").click(function() {
                                 $("#skillsurveyswitch").attr("value", 1);
                                 return true;
-    });';
+        });';
 
         // end form
         $s .=  '</form>' . "\n";
