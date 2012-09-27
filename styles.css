@@ -329,7 +329,7 @@ margin:0.5em;
     padding: 0px 8px;
 }
 .vertical_question_title {
-    min-height: 96px;
+    min-height: 10em;
     border-bottom: 1px dotted #ccc;
 }
 .ui-slider-vertical {
@@ -366,6 +366,10 @@ margin:0.5em;
     background:none;
 }
 
+.separator {
+    height: 4em;
+    clear: both;
+}
 
 .abilities-thought-bubbles {
 }

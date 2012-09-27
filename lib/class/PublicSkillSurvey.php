@@ -537,6 +537,7 @@ class PublicSkillSurvey extends Survey {
     public function showVerticalSurveybyCompetency($type) {
         global $textr;
         $s = $j = '';
+        $questionsPerLine = 6;
 
         /**
          * Hack to reverse the alignment array so it displays correctly
@@ -567,17 +568,20 @@ class PublicSkillSurvey extends Survey {
 
         $s .=  '<ul class="dpad w100 question_list">' . "\n";
 
-        // ok we need to put in some titles
-        $s .=	'<li class="title_key">
-                                <div class="vertical_pad tright title_key">
-                                <p class="vertical_question_title tright">What you can do</p>
-                                <div class="vertical_slider_container tright">Ability level</div>
-                                </div>
-                                <div class="tright">What you might think</div>
-                                </li>' . "\n";
-
         // loop through the questions....
         for ($i = $start; $i <= $end; $i++) {
+
+            if (($i % $questionsPerLine) === 0) {
+                $s .= '<div class="separator"></div>
+                       <li class="title_key">
+                       <div class="vertical_pad tright title_key">
+                       <p class="vertical_question_title tright">What you can do</p>
+                       <div class="vertical_slider_container tright">Ability level</div>
+                       </div>
+                       <div class="tright">What you might think</div>
+                       </li>' . "\n";
+             }
+
             // make sure that this question actually exists
             if (isset($this->results[$i])) {
                 // fetch the answer, this will be -1 if it's a previous
@@ -628,12 +632,12 @@ class PublicSkillSurvey extends Survey {
                 }
 
 
-                $s .=   '</li>' . "\n";
+                $s .= '</li>' . "\n";
             } // end if question exists
+
         } // end question loop
 
-        $s .=  '</ul>
-                                <div class="fclear"></div>';
+        $s .=  '</ul>';
 
         // end the container div
         $s .=  '</div> <!-- container end -->' . "\n";
