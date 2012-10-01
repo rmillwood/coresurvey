@@ -23,7 +23,7 @@ class mod_coresurvey_mod_form extends moodleform_mod {
         }
         $mform->addRule('name', null, 'required', null, 'client');
         $mform->addRule('name', get_string('maximumchars', '', 255), 'maxlength', 255, 'client');
-        //$mform->addHelpButton('name', 'coresurveyname', 'coresurvey');
+        $mform->addHelpButton('name', 'coresurveyname', 'coresurvey');
 
         // Adding the standard "intro" and "introformat" fields
         $this->add_intro_editor();
