@@ -252,10 +252,10 @@ class PublicRoleSurvey extends Survey {
         // headings
         $s.=   '<div class="attitudeandactivityandyoumightthink">
                                 <div class="attitudeandactivitytitle">
-                                <div class="attitude">
+                                <div class="attitudeText">
                                 <b>' . get_string('coresurvey_title_alignment', 'coresurvey') . '</b>
                                                         </div>
-                                                        <div class="activity">
+                                                        <div class="activityText">
                                                         <b>' . get_string('coresurvey_title_activities', 'coresurvey') . '</b>
                                                                                 </div>
                                                                                 </div>
@@ -291,7 +291,7 @@ class PublicRoleSurvey extends Survey {
                     $s .= '<div class="attitudeandactivity">';
 
                     // create the slider
-                    $s .=  '<div class="attitude">
+                    $s .=  '<div class="attitudeText">
                                             <div id="slider_header_' . $this->results[$i]['idx'] . '" class="attitudeText" style="">&nbsp;<span style="display:none;">' . $this->alignment[2] . '</span></div>
                                                                     <div id="slider_' . $this->results[$i]['idx'] . '" class="w95 ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"></div>
                                                                                             <input type="hidden" name="answer_' . $this->results[$i]['idx'] . '" id="answer_' . $this->results[$i]['idx'] . '" value="' . $answer . '"/>
@@ -300,7 +300,7 @@ class PublicRoleSurvey extends Survey {
                     $j .= 'CreateSliderTest("' . $this->results[$i]['idx'] . '", ' . $answer . ');' . "\n";
 
                     // create the question
-                    $s .=  '<div class="activity">
+                    $s .=  '<div class="activityText">
                                             ' . $this->data[$this->results[$i]['role']]['aspects'][$this->results[$i]['aspect']]['title'] . '
                                                                     </div>' . "\n";
 
