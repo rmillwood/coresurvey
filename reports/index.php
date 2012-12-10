@@ -17,10 +17,9 @@
      require_once($CFG->dirroot . '/mod/coresurvey/bootstrap/admin.php');
 
      $core_page->addBreadcrumb("Reports");
-     
+
      // include ui.jquery
-     $core_page->addBody('<script type="text/javascript" src="' . $CFG->wwwroot . '/mod/coresurvey/lib/jquery.ui.1.8.7/jquery-ui-1.8.7.custom.min.js"></script>');
-     $core_page->addHead('<link rel="stylesheet" type="text/css" href="' . $CFG->wwwroot . '/mod/coresurvey/lib/jquery.ui.1.8.7/ui-lightness/jquery-ui-1.8.7.custom.css"/>');
+     $core_page->addBody('<script type="text/javascript" src="' . $CFG->wwwroot . '/mod/coresurvey/lib/js/jquery-1.3.2.min.js"></script>');
 
      // include the classes required
      require_once($CFG->dirroot . '/mod/coresurvey/lib/class/DBhandler.php');
@@ -30,38 +29,38 @@
      require_once($CFG->dirroot . '/mod/coresurvey/lib/class/SkillSurvey.php');
 
      $summary = Reports::summary();
-     
+
      // last year
      $last_year = date('Y') - 1;
-     
+
      $lastmonth_timestamp = mktime(0, 0, 0, date("m")-1, date("d"),   date("Y"));
-     
+
      // javascript
      $core_page->addJavascript('$("#start").datepicker({ dateFormat: "dd-mm-yy" });');
      $core_page->addJavascript('$("#end").datepicker({ dateFormat: "dd-mm-yy" });');
-     
+
      $core_page->addJavascript('
 	$("#last_year").click(function() {
 	    $("#start").val("01-01-' . $last_year . '");
 	    $("#end").val("31-12-' . $last_year . '");
 	});
     ');
-     
+
      $core_page->addJavascript('
 	 $("#last_month").click(function() {
 	    $("#start").val("01-' . date('m-Y', $lastmonth_timestamp) . '");
 	    $("#end").val("31-' . date('m-Y', $lastmonth_timestamp) . '");
 	 });
      ');
-     
+
      $report = $msg = $pdf = '';
-     
+
      // do we need to do the stats
      if (isset($_POST['start']) && isset($_POST['end'])) {
 	 // check and make sure that the dates are valid
 	 $start = $_POST['start'];
 	 $end = $_POST['end'];
-	 
+
 	 if ($start > $end) {
 	     $msg = "Invalid dates. Your start date must be less than your end date";
 	 } else {
@@ -74,7 +73,7 @@
 			</div>';
 	 }
      }
-     
+
 ?>
 <?php require_once($CFG->dirroot . '/mod/coresurvey/template/adminheader.php'); ?>
             <div id="content">
@@ -93,7 +92,7 @@
 				last month
 			    </button>
 			</p>
-			    
+
 		    </form>
 		</div>
 		<?php echo $pdf; ?>

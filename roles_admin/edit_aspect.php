@@ -26,7 +26,7 @@
      require_once($CFG->dirroot . '/mod/coresurvey/lib/class/DBhandler.php');
      require_once($CFG->dirroot . '/mod/coresurvey/lib/class/Survey.php');
      require_once($CFG->dirroot . '/mod/coresurvey/lib/class/RoleSurvey.php');
-     
+
      $survey = new RoleSurvey(true);
 
      $data = $survey->editAspectForm(intval($_GET['r']), intval($_GET['i']));
@@ -35,7 +35,6 @@
      // need to load in jquery ui for the slider......
      $core_page->addBody('<script type="text/javascript" src="' . $CFG->wwwroot . '/mod/coresurvey/lib/jquery.ui/js/ui.core.js"></script>');
      $core_page->addBody('<script type="text/javascript" src="' . $CFG->wwwroot . '/mod/coresurvey/lib/jquery.ui/js/ui.slider.js"></script>');
-     $core_page->addHead('<link rel="stylesheet" type="text/css" href="' . $CFG->wwwroot . '/mod/coresurvey/lib/jquery.ui/css/ui-lightness/jquery-ui-1.7.2.custom.css"/>');
 
      $core_page->addJavascript($data['java']);
 

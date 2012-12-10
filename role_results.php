@@ -41,7 +41,7 @@ $PAGE->set_heading(format_string($course->fullname));
 
      // check and make sure that we are looking for a valid survey for this member
      if (   ! isset($survey->member_survey->m_id) OR $survey->member_survey->m_id != $USER->id) {
-	 // invalid survey for this member and we need to go back to the overviw
+	 // invalid survey for this member and we need to go back to the overview
 	 coresurvey_page_redirect($CFG->wwwroot . '/mod/coresurvey/view.php?id=' . $cm->id);
      }
 
@@ -56,29 +56,14 @@ $PAGE->set_heading(format_string($course->fullname));
     $core_page->addBody($survey->createJavaAlignment());
 
      // need to load in jquery ui for the slider......
-     //OLD WAY $core_page->addBody('<script type="text/javascript" src="' . $CFG->wwwroot . '/mod/coresurvey/lib/jquery.ui/js/ui.core.js"></script>');
          $PAGE->requires->js('/mod/coresurvey/lib/jquery.ui/js/ui.core.js');
-    //OLD WAY $core_page->addBody('<script type="text/javascript" src="' . $CFG->wwwroot . '/mod/coresurvey/lib/jquery.ui/js/ui.slider.js"></script>');
          $PAGE->requires->js('/mod/coresurvey/lib/jquery.ui/js/ui.slider.js');
-    $core_page->addHead('<link rel="stylesheet" type="text/css" href="' . $CFG->wwwroot . '/mod/coresurvey/lib/jquery.ui/css/ui-lightness/jquery-ui-1.7.2.custom.css"/>');
-     //Now in syles.css $core_page->addHead('<link rel="stylesheet" type="text/css" href="' . $CFG->wwwroot . '/mod/coresurvey/lib/css/public_survey.css"/>');
-
-     // add tip tip
-     //$core_page->addBody('<script type="text/javascript" src="' . $CFG->wwwroot . '/mod/coresurvey/lib/simpletip/jquery.simpletip-1.3.1.min.js"></script>');
 
      // load in survey JS
-     //OLD WAY $core_page->addBody('<script type="text/javascript" src="' . $CFG->wwwroot . '/mod/coresurvey/lib/js/public_survey.js"></script>');
     $PAGE->requires->js('/mod/coresurvey/lib/js/public_survey.js');
 
-     // add the raphael library
-    //OLD WAY $core_page->addHead('<script type="text/javascript" src="' . $CFG->wwwroot . '/mod/coresurvey/lib/js/raphael-base.1.5.2.js"></script>');
+     // add the raphael library    //OLD WAY $core_page->addHead('<script type="text/javascript" src="' . $CFG->wwwroot . '/mod/coresurvey/lib/js/raphael-base.1.5.2.js"></script>');
     $PAGE->requires->js('/mod/coresurvey/lib/js/raphael-base.1.5.2.js',true);
-
-     // add the tabs
-     //$core_page->addJavascript('$("ul.regtabs").tabs("div.regpanes > div").history();');
-     //$core_page->addHead('<link rel="stylesheet" type="text/css" href="' . $CFG->wwwroot . '/mod/coresurvey/lib/css/tabs2.css">');
-
-
 
      // do the taken date / time
      $taken_date = date("H:i" , $survey->member_survey->end_date) . ' on ' . date("jS M Y" , $survey->member_survey->end_date);
@@ -95,7 +80,7 @@ $PAGE->set_heading(format_string($course->fullname));
 
 <div id="rose_chart"></div>
 
-<div id="returnButton">
+<div class="core_survey_return_to_overview_button">
     <form action="<?php echo $CFG->wwwroot; ?>/mod/coresurvey/view.php" method="get">
         <button type="submit">Return to Overview</button>
         <input type="hidden" name="id" value="<?php echo $cm->id; ?>">

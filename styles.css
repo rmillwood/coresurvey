@@ -82,9 +82,9 @@ div.regpanes {
     float: right;
     clear: both;
 }
-#returnButton {
-    float: right;
-    clear: both;
+.core_survey_return_to_overview_button {
+   float: right;
+   clear: both;
 }
 #save_answers_and_view_guidance {
     float:right;
@@ -104,7 +104,8 @@ margin:0.5em;
 }
 
 .attitudeandactivityandyoumightthink {
-    width:760px;
+    width:695px;
+    clear: left;
 }
 
 .attitudeandactivitytitle {
@@ -118,13 +119,13 @@ margin:0.5em;
     background-color:#EFE;
     padding:8px;
     min-height: 5em;
-    width: 416px;
+    width: 320px;
     float:left;
     margin-bottom: 12px;
 }
 .attitudeText {
     float:left;
-    width:200px;
+    width:150px;
     padding-left: 8px;
     text-align: right;
     font-style: italic;
@@ -132,15 +133,14 @@ margin:0.5em;
 }
 .activityText {
    float:right;
-   width:200px;
-   padding:none;
+   width:150px;
    text-align: left;
 }
 
 
 .youmightthink {
-    float:right;
-    width: 320px;
+    float:left;
+    width: 300px;
     text-align: center;
     vertical-align:middle;
     padding-top:4px;
@@ -421,14 +421,30 @@ margin:0.5em;
 .skills_table .bbottom {
     border-bottom: 2px dotted #000;
 }
-.print_button {
+.core_survey_print_button {
    float: right;
-}
-.return_to_overview_button {
-   float: right;
+   clear: both;
 }
 
 /* End of section which was a separate file - lib/css/skills.css */
+
+
+
+
+/* This section was a separate file - lib/css/print.css */
+
+/* Print CSS */
+    
+div#header{display: none;}
+div.navbar{display: none;}
+div#content{font-size: smaller;}
+div.print_button{display: none;}
+div.return_to_overview_button{display: none;}
+div#footer{display: none;}
+
+/* End of section which was a separate file - lib/css/print.css */
+
+
 
 /*
  * jQuery UI CSS Framework 1.8.7

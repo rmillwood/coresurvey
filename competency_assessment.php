@@ -67,13 +67,12 @@ $data = $survey->showVerticalSurveybyCompetency($type);
 $core_page->addBody($survey->createJavaAlignment());
 
 // need to load in jquery ui for the slider......
-$core_page->addBody('<script type="text/javascript" src="' . $CFG->wwwroot . '/mod/coresurvey/lib/jquery.ui/js/ui.core.js"></script>');
-$core_page->addBody('<script type="text/javascript" src="' . $CFG->wwwroot . '/mod/coresurvey/lib/jquery.ui/js/ui.slider.js"></script>');
-$core_page->addHead('<link rel="stylesheet" type="text/css" href="' . $CFG->wwwroot . '/mod/coresurvey/lib/jquery.ui.1.8.7/south-street/jquery-ui-1.8.7.custom.css"/>');
-$core_page->addHead('<link rel="stylesheet" type="text/css" href="' . $CFG->wwwroot . '/mod/coresurvey/lib/css/skills.css"/>');
+// need to load in jquery ui for the slider......
+$PAGE->requires->js('/mod/coresurvey/lib/jquery.ui/js/ui.core.js');
+$PAGE->requires->js('/mod/coresurvey/lib/jquery.ui/js/ui.slider.js');
 
 // load in survey JS
-$core_page->addBody('<script type="text/javascript" src="' . $CFG->wwwroot . '/mod/coresurvey/lib/js/public_survey.js"></script>');
+$PAGE->requires->js('/mod/coresurvey/lib/js/public_survey.js');
 
 echo $OUTPUT->header();
 ?>

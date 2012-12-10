@@ -24,8 +24,7 @@
      $core_page->addBreadcrumb("Editable text");
 
      // include ui.jquery
-     $core_page->addBody('<script type="text/javascript" src="' . $CFG->wwwroot . '/mod/coresurvey/lib/jquery.ui.1.8.7/jquery-ui-1.8.7.custom.min.js"></script>');
-     $core_page->addHead('<link rel="stylesheet" type="text/css" href="' . $CFG->wwwroot . '/mod/coresurvey/lib/jquery.ui.1.8.7/ui-lightness/jquery-ui-1.8.7.custom.css"/>');
+     $core_page->addBody('<script type="text/javascript" src="' . $CFG->wwwroot . '/mod/coresurvey/lib/js/jquery-1.3.2.min.js"></script>');
 
      // include the classes required
      require_once($CFG->dirroot . '/mod/coresurvey/lib/class/DBhandler.php');

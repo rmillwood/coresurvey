@@ -60,7 +60,6 @@ $survey_instructions = isset($survey->matrix['instructions']['role_summary']) ? 
 // need to load in jquery ui for the slider......
 $PAGE->requires->js('/mod/coresurvey/lib/jquery.ui/js/ui.core.js');
 $PAGE->requires->js('/mod/coresurvey/lib/jquery.ui/js/ui.slider.js');
-$core_page->addHead('<link rel="stylesheet" type="text/css" href="' . $CFG->wwwroot . '/mod/coresurvey/lib/jquery.ui.1.8.7/south-street/jquery-ui-1.8.7.custom.css"/>');
 
 // load in survey JS
 $PAGE->requires->js('/mod/coresurvey/lib/js/public_survey.js');

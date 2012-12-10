@@ -47,20 +47,14 @@ if (   ! isset($survey->member_survey->m_id)
     coresurvey_page_redirect($CFG->wwwroot . '/mod/coresurvey/view.php?id=' . $cm->id);
 }
 
-//$results = $survey->showCompletedSurvey()
-
-//$core_page->addBody($survey->createJavaAlignment());
 
 // need to load in jquery ui for the slider......
-$core_page->addBody('<script type="text/javascript" src="' . $CFG->wwwroot . '/mod/coresurvey/lib/jquery.ui/js/ui.core.js"></script>');
-$core_page->addBody('<script type="text/javascript" src="' . $CFG->wwwroot . '/mod/coresurvey/lib/jquery.ui/js/ui.slider.js"></script>');
-$core_page->addHead('<link rel="stylesheet" type="text/css" href="' . $CFG->wwwroot . '/mod/coresurvey/lib/jquery.ui/css/ui-lightness/jquery-ui-1.7.2.custom.css"/>');
-$core_page->addHead('<link rel="stylesheet" type="text/css" href="' . $CFG->wwwroot . '/mod/coresurvey/lib/css/public_survey.css"/>');
-$core_page->addHead('<link rel="stylesheet" type="text/css" href="' . $CFG->wwwroot . '/mod/coresurvey/lib/css/skills.css"/>');
-$core_page->addHead('<link rel="stylesheet" type="text/css" media="print" href="' . $CFG->wwwroot . '/mod/coresurvey/lib/css/print.css"/>');
+$PAGE->requires->js('/mod/coresurvey/lib/jquery.ui/js/ui.core.js');
+$PAGE->requires->js('/mod/coresurvey/lib/jquery.ui/js/ui.slider.js');
 
 // load in survey JS
-$core_page->addBody('<script type="text/javascript" src="' . $CFG->wwwroot . '/mod/coresurvey/lib/js/public_survey.js"></script>');
+$PAGE->requires->js('/mod/coresurvey/lib/js/public_survey.js');
+
 
 $analysis = $survey->tabulate($USER->firstname . ' ' . $USER->lastname);
 
@@ -71,13 +65,13 @@ $analysis = $survey->tabulate($USER->firstname . ' ' . $USER->lastname);
 <div>
     <?php echo $analysis; ?>
 </div>
-<div class="return_to_overview_button">
+<div class="core_survey_return_to_overview_button">
     <a
         href="<?php echo $CFG->wwwroot; ?>/mod/coresurvey/view.php?id=<?php echo $cm->id; ?>">
         <button type="button">Return to Overview</button>
     </a>
 </div>
-<div class="print_button">
+<div class="coresurvey_print_button">
     <form>
         <input type="button" value=" Print this guidance"
             onclick="window.print();return false;" />
