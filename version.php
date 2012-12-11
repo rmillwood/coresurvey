@@ -9,7 +9,7 @@
  * @package mod/coresurvey
  */
 
-$module->version  = 2012120401;  // The current module version (Date: YYYYMMDDXX)
+$module->version  = 2012121101;  // The current module version (Date: YYYYMMDDXX)
 $module->cron     = 0;           // Period for cron to check this module (secs)
 
 ?>
