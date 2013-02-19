@@ -1,4 +1,13 @@
-<?php
+<?php  // $Id: lib.php,v 1.7.2.5 2009/04/22 21:30:57 skodak Exp $
+
+/*
+ 'coresurvey' plug-in for Moodle
+Core Education UK
+http://www.core-ed.org.uk
+Author: Richard Millwood, based on code by Nigel Hulls of CORE Education NZ
+E-mail: richard.millwood2core-ed.org.uk
+*/
+
 
 /**
  * Library of functions and constants for module coresurvey

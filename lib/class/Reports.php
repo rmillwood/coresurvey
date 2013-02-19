@@ -58,9 +58,7 @@ class Reports {
 	$skill->fetch_by_period($start, $end);
 
 	// do the title
-	$s .=	'<h1>Macmillan Cancer Support</h1>';
-	$s .=	'<h2>Cancer Voices Learning Needs Tool</h2>';
-	$s .=	'<h3>Report for ' . date('d-m-Y', $start) . ' to ' . date('d-m-Y', $end) . '</h3>';
+	$s .=	'<h3>Report for ' . $start . ' to ' . $end . '</h3>';
 
 	// role analysis
 	$s .=	'<table class="w90 fcenter">';

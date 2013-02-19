@@ -1,4 +1,11 @@
 @CHARSET "UTF-8";
+/*
+'coresurvey' plug-in for Moodle
+Core Education UK
+http://www.core-ed.org.uk
+Author: Richard Millwood, based on code by Nigel Hulls of CORE Education NZ
+E-mail: richard.millwood2core-ed.org.uk
+*/
 
 /* This section was a separate file - lib/css/tab2.css  */
 ul.regtabs {
@@ -82,9 +89,9 @@ div.regpanes {
     float: right;
     clear: both;
 }
-.core_survey_return_to_overview_button {
-   float: right;
-   clear: both;
+#returnButton {
+    float: right;
+    clear: both;
 }
 #save_answers_and_view_guidance {
     float:right;
@@ -104,12 +111,11 @@ margin:0.5em;
 }
 
 .attitudeandactivityandyoumightthink {
-    width:695px;
-    clear: left;
+    width:760px;
 }
 
 .attitudeandactivitytitle {
-    width: 416px;
+    width: 316px;
     float:left;
     padding:4px;
 }
@@ -119,13 +125,13 @@ margin:0.5em;
     background-color:#EFE;
     padding:8px;
     min-height: 5em;
-    width: 320px;
+    width: 416px;
     float:left;
     margin-bottom: 12px;
 }
 .attitudeText {
     float:left;
-    width:150px;
+    width:200px;
     padding-left: 8px;
     text-align: right;
     font-style: italic;
@@ -133,14 +139,15 @@ margin:0.5em;
 }
 .activityText {
    float:right;
-   width:150px;
+   width:200px;
+   padding:none;
    text-align: left;
 }
 
 
 .youmightthink {
-    float:left;
-    width: 300px;
+    float:right;
+    width: 320px;
     text-align: center;
     vertical-align:middle;
     padding-top:4px;
@@ -421,32 +428,14 @@ margin:0.5em;
 .skills_table .bbottom {
     border-bottom: 2px dotted #000;
 }
-.core_survey_print_button {
+.print_button {
    float: right;
-   clear: both;
+}
+.return_to_overview_button {
+   float: right;
 }
 
 /* End of section which was a separate file - lib/css/skills.css */
-
-
-
-
-/* This section was a separate file - lib/css/print.css */
-
-/* Print CSS */
-    
-@media print {
-div#header{display: none;}
-div.navbar{display: none;}
-div#content{font-size: smaller;}
-div.print_button{display: none;}
-div.return_to_overview_button{display: none;}
-div#footer{display: none;}
-}
-
-/* End of section which was a separate file - lib/css/print.css */
-
-
 
 /*
  * jQuery UI CSS Framework 1.8.7

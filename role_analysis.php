@@ -1,4 +1,11 @@
 <?php  // Undertake a role analysis
+/*
+ 'coresurvey' plug-in for Moodle
+ Core Education UK
+ http://www.core-ed.org.uk
+ Author: Richard Millwood, based on code by Nigel Hulls of CORE Education NZ
+ E-mail: richard.millwood2core-ed.org.uk
+ */
 
 require_once(dirname(dirname(dirname(__FILE__))).'/config.php');
 require_once(dirname(__FILE__).'/lib.php');
@@ -60,6 +67,7 @@ $survey_instructions = isset($survey->matrix['instructions']['role_summary']) ? 
 // need to load in jquery ui for the slider......
 $PAGE->requires->js('/mod/coresurvey/lib/jquery.ui/js/ui.core.js');
 $PAGE->requires->js('/mod/coresurvey/lib/jquery.ui/js/ui.slider.js');
+$core_page->addHead('<link rel="stylesheet" type="text/css" href="' . $CFG->wwwroot . '/mod/coresurvey/lib/jquery.ui.1.8.7/south-street/jquery-ui-1.8.7.custom.css"/>');
 
 // load in survey JS
 $PAGE->requires->js('/mod/coresurvey/lib/js/public_survey.js');

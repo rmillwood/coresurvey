@@ -1,4 +1,11 @@
 <?php // The overview page with instructions, surveys paused and completed
+/*
+ 'coresurvey' plug-in for Moodle
+ Core Education UK
+ http://www.core-ed.org.uk
+ Author: Richard Millwood, based on code by Nigel Hulls of CORE Education NZ
+ E-mail: richard.millwood2core-ed.org.uk
+ */
 
 require_once(dirname(dirname(dirname(__FILE__))).'/config.php');
 require_once(dirname(__FILE__).'/lib.php');
@@ -29,7 +36,7 @@ $PAGE->set_title(format_string($coresurvey->name));
 $PAGE->set_heading(format_string($course->fullname));
 
 
-/**
+/*
  * CoreSurvey Stuff
 */
 // Now add in our bootstrap file to load in core classes.

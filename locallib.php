@@ -1,12 +1,22 @@
 <?php
+
+/*
+ 'coresurvey' plug-in for Moodle
+ Core Education UK
+ http://www.core-ed.org.uk
+ Author: Richard Millwood, based on code by Nigel Hulls of CORE Education NZ
+ E-mail: richard.millwood2core-ed.org.uk
+ */
+
 if (!defined('MOODLE_INTERNAL')) {
     die('Direct access to this script is forbidden.'); // It must be included from a Moodle page
 }
+
 /*
- * coresurvey extra library files
- * Note:: I'm using a database abstraction class to unify all database calls
- * for this module, this will make it easier to upgrade to Moodle 2.0
- */
+coresurvey extra library files
+Note:: I'm using a database abstraction class to unify all database calls
+for this module, this will make it easier to upgrade to Moodle 2.0
+*/
 
 require_once($CFG->dirroot . '/mod/coresurvey/lib/class/CoreDBWrapper.php');
 
@@ -17,9 +27,8 @@ require_once($CFG->dirroot . '/mod/coresurvey/lib/class/CoreDBWrapper.php');
 
 require_once("$CFG->dirroot/mod/coresurvey/lib.php");
 
-/**
- * Debug function for displaying data
- */
+// Debug function for displaying data
+
 
 function coresurvey_debug($object) {
     echo '<pre class="tleft">';
@@ -29,26 +38,23 @@ function coresurvey_debug($object) {
     echo '</pre>';
 }
 
-/**
-     * Gets the last survey by version number from the db and loads it into
-     * the object
-     */
+
+// Gets the last survey by version number from the db and loads it into the object
 
     function coresurvey_get_last_role() {
         global $DB;
         if (! $survey = $DB->get_records_sql( 'SELECT * FROM {coresurveyrole} ORDER BY versionnumber DESC LIMIT 1')) { exit; }
 
-/**  REPLACES      if (! $survey = CoreDBWrapper::fetch_multiple(    "SELECT *
-*                                            FROM " . "coresurveyrole
-*                                            ORDER BY versionnumber DESC
-*                                            LIMIT 1")) {
-*             exit;
-*        }
+/* REPLACES      if (! $survey = CoreDBWrapper::fetch_multiple(    "SELECT *
+                                            FROM " . "coresurveyrole
+                                            ORDER BY versionnumber DESC
+                                            LIMIT 1")) {
+             exit;
+        }
 */
 
 
-        // stupid hack as we don't know the id of the record, and this is used as
-        // the array key
+// stupid hack as we don't know the id of the record, and this is used as the array key
 
         foreach ($survey AS $key => $val) {
             return $val;
@@ -58,63 +64,56 @@ function coresurvey_debug($object) {
     } // end function
 
 
-
-    /**
-     * Loads a specific role survey
-     */
+// Loads a specific role survey
 
     function coresurvey_get_specific_role($id = 0) {
         global $DB;
         $survey = false;
         if (! $survey = $DB->get_record_sql( 'SELECT * FROM {coresurveyrole} WHERE id = ?', array( intval($id) ))) {  }
 
-/** REPLACES
-*        if (! $survey = CoreDBWrapper::fetch_single("SELECT * FROM " . "coresurveyrole
-*                                                    WHERE id = " . intval($id))) {
-*        }
+/* REPLACES
+        if (! $survey = CoreDBWrapper::fetch_single("SELECT * FROM " . "coresurveyrole
+                                                    WHERE id = " . intval($id))) {
+        }
 */
         return $survey;
 
     } // end function
 
 
-    /**
-     * Loads a specific skill survey
-     */
+// Loads a specific skill survey
 
     function coresurvey_get_specific_skill($id = 0) {
         global $DB;
         $survey = false;
         if (! $survey = $DB->get_record_sql( 'SELECT * FROM {coresurveyskill} WHERE id = ?', array( intval($id) ))) {  }
 
-/** REPLACES
-*        if (! $survey = CoreDBWrapper::fetch_single("SELECT * FROM " . "coresurveyskill
-*                                                    WHERE id = " . intval($id))) {
-*        }
+/* REPLACES
+        if (! $survey = CoreDBWrapper::fetch_single("SELECT * FROM " . "coresurveyskill
+                                                    WHERE id = " . intval($id))) {
+        }
 */
         return $survey;
 
     } // end function
 
-    /**
-     * Gets the last survey by version number from the db and loads it into
-     * the object
-     */
+
+// Gets the last survey by version number from the db and loads it into the object
 
     function coresurvey_get_last_skill() {
         global $DB;
         if (! $survey = $DB->get_records_sql( 'SELECT * FROM {coresurveyskill} ORDER BY versionnumber DESC LIMIT 1')) { exit; }
 
-/**  REPLACES
-*        if (! $survey = CoreDBWrapper::fetch_multiple(    "SELECT *
-*                                            FROM " . "coresurveyskill
-*                                            ORDER BY versionnumber DESC
-*                                            LIMIT 1")) {
-*            exit;
-*        }
+/*  REPLACES
+        if (! $survey = CoreDBWrapper::fetch_multiple(    "SELECT *
+                                            FROM " . "coresurveyskill
+                                           ORDER BY versionnumber DESC
+                                            LIMIT 1")) {
+            exit;
+       }
 */
-        // stupid hack as we don't know the id of the record, and this is used as
-        // the array key
+
+// stupid hack as we don't know the id of the record, and this is used as the array key
 
         foreach ($survey AS $key => $val) {
             return $val;
@@ -124,9 +123,7 @@ function coresurvey_debug($object) {
     } // end function
 
 
-    /**
-     * returns a list of saved survey data by member
-     */
+// returns a list of saved survey data by member
 
     function coresurvey_get_role_surveys_member() {
         global $USER, $DB;
@@ -134,74 +131,71 @@ function coresurvey_debug($object) {
 
 
 
-/**  REPLACES
-*        $survey = CoreDBWrapper::fetch_multiple("SELECT * FROM " . "coresurveyrole_member
-*                                                 WHERE m_id = " . intval($USER->id) . "
-*                                                 ORDER BY start_date ASC");
+/*  REPLACES
+        $survey = CoreDBWrapper::fetch_multiple("SELECT * FROM " . "coresurveyrole_member
+                                                 WHERE m_id = " . intval($USER->id) . "
+                                                 ORDER BY start_date ASC");
 */
         return $survey;
     } // end function
 
 
-    /**
-     * gets all role surveys for a specific time period
-     */
+// gets all role surveys for a specific time period
 
     function coresurvey_get_role_surveys_member_by_date($start, $end) {
 	global $USER, $DB;
 
-	$start = date('Y-m-d', strtotime($start)) . ' 00:00:00';
-	$end = date('Y-m-d', strtotime($end)) . ' 23:59:59';
+	//$start = date('Y-m-d', strtotime($start)) . ' 00:00:00';
+	//$end = date('Y-m-d', strtotime($end)) . ' 23:59:59';
+	$start = strtotime($start);
+	$end = strtotime($end);
 	$res = $DB->get_records_sql( 'SELECT * FROM {coresurveyrole_member} WHERE end_date>= ? AND end_date <= ?', array( $start , $end ));
 
-/**  REPLACES
-*	$res = CoreDBWrapper::fetch_multiple("SELECT * FROM " . "coresurveyrole_member
-*					    WHERE end_date >= '" . $start . "'
-*					    AND end_date <= '" . $end . "'");
+/*  REPLACES
+	$res = CoreDBWrapper::fetch_multiple("SELECT * FROM " . "coresurveyrole_member
+					    WHERE end_date >= '" . $start . "'
+					    AND end_date <= '" . $end . "'");
 */
 		return $res;
 
     } // end function
 
 
-    /**
-     * gets all competency surveys for a specific time period
-     */
+// gets all competency surveys for a specific time period
 
     function coresurvey_get_skill_surveys_member_by_date($start, $end) {
 	global $USER, $DB;
 
-	$start = date('Y-m-d', strtotime($start)) . ' 00:00:00';
-	$end = date('Y-m-d', strtotime($end)) . ' 23:59:59';
+	//$start = date('Y-m-d', strtotime($start)) . ' 00:00:00';
+	//$end = date('Y-m-d', strtotime($end)) . ' 23:59:59';
+	$start = strtotime($start);
+	$end = strtotime($end);
+
 	$res = $DB->get_records_sql( 'SELECT * FROM {coresurveyskill_member} WHERE end_date>= ? AND end_date <= ?', array( $start , $end ));
 
-/**  REPLACES
-*	$res = CoreDBWrapper::fetch_multiple("SELECT * FROM " . "coresurveyskill_member
-*					    WHERE end_date >= '" . $start . "'
-*					    AND end_date <= '" . $end . "'");
+/*  REPLACES
+	$res = CoreDBWrapper::fetch_multiple("SELECT * FROM " . "coresurveyskill_member
+					    WHERE end_date >= '" . $start . "'
+					    AND end_date <= '" . $end . "'");
 */
 		return $res;
 
     } // end function
 
 
-    /**
-     * returns a list of saved survey data by member
-     */
+// returns a list of saved survey data by member
 
     function coresurvey_get_skills_surveys_member() {
         global $USER, $DB;
         return $DB->get_records_sql('SELECT * FROM {coresurveyskill_member} WHERE m_id = ? ORDER BY start_date ASC', array(intval($USER->id)));
-/** REPLACES
- *       $survey = CoreDBWrapper::fetch_multiple("SELECT * FROM " . "coresurveyskill_member WHERE m_id = " . intval($USER->id) . " ORDER BY start_date ASC");
- *          return $survey;
+/* REPLACES
+       $survey = CoreDBWrapper::fetch_multiple("SELECT * FROM " . "coresurveyskill_member WHERE m_id = " . intval($USER->id) . " ORDER BY start_date ASC");
+         return $survey;
 */
     } // end function
 
 
-    /**
-     * saves a survey into the db, gets the object passed into it
-     */
+// saves a survey into the db, gets the object passed into it
 
     function coresurvey_save_role_survey($obj) {
         global $DB;
@@ -213,9 +207,7 @@ function coresurvey_debug($object) {
     } // end function
 
 
-    /**
-     * saves a survey into the db, gets the object passed into it
-     */
+// saves a survey into the db, gets the object passed into it
 
     function coresurvey_save_skill_survey($obj) {
         global $DB;
@@ -226,18 +218,16 @@ function coresurvey_debug($object) {
 
     } // end function
 
-    /**
-     * saves a members role survey results
-     */
+
+// saves a members role survey results
 
     function coresurvey_save_role_survey_member($obj) {
         global $DB;
         return $DB->insert_record('coresurveyrole_member', $obj);
     }
 
-    /**
-     * saves a members role survey results
-     */
+
+// saves a members role survey results
 
     function coresurvey_save_skill_survey_member($obj) {
         global $DB;
@@ -245,88 +235,75 @@ function coresurvey_debug($object) {
         return $DB->insert_record('coresurveyskill_member', $obj);
     }
 
-    /**
-     * Updates a members role survey results
-     */
+
+// Updates a members role survey results
 
     function coresurvey_update_role_survey_member($obj) {
         global $DB;
         return $DB->update_record('coresurveyrole_member', $obj);
     }
 
-     /**
-     * Updates a members role survey results
-     */
+
+//  Updates a members role survey results
 
     function coresurvey_update_skill_survey_member($obj) {
         global $DB;
         return $DB->update_record('coresurveyskill_member', $obj);
     }
 
-    /**
-     * updates an editable text record
-     */
+
+// updates an editable text record
 
     function coresurvey_update_textr($obj) {
         global $DB;
         return $DB->update_record('coresurvey_textr', $obj);
     }
 
-    /**
-     * fetches all of the editable records
-     */
+
+// fetches all of the editable text records
 
     function coresurvey_get_textr() {
 	global $DB;
 	return $DB->get_record_sql('SELECT * FROM {coresurvey_textr} WHERE id = 1');
 
 /** REPLACES
-* 	return CoreDBWrapper::fetch_single("SELECT * FROM mdl." . "coresurvey_textr WHERE id = 1");
+	return CoreDBWrapper::fetch_single("SELECT * FROM mdl." . "coresurvey_textr WHERE id = 1");
 */
 
         } //end function
 
-    /**
-     * removes a survey
-     */
+// removes a survey
 
     function coresurvey_delete_skill_survey_member($id) {
     global $DB;
 	return $DB->delete_records('coresurveyskill_member', array($id));
     }
 
-
-    /**
-     * fetches a members role survey result
-     */
+// fetches a members role survey result
 
     function coresurvey_fetch_role_survey_member($id) {
         global $DB;
         return $DB->get_record_sql('SELECT * FROM {coresurveyrole_member} WHERE id = ? ORDER BY end_date DESC', array(intval($id)));
 
-/** REPLACES
-*        return CoreDBWrapper::fetch_single("SELECT * FROM " . "coresurveyrole_member WHERE id = " . intval($id) . " ORDER BY end_date DESC");
+/* REPLACES
+        return CoreDBWrapper::fetch_single("SELECT * FROM " . "coresurveyrole_member WHERE id = " . intval($id) . " ORDER BY end_date DESC");
 */
     } //end function
 
 
-    /**
-     * fetches a members skill survey result
-     */
+// fetches a members skill survey result
 
     function coresurvey_fetch_skill_survey_member($id) {
         global $DB;
         return $DB->get_record_sql('SELECT * FROM {coresurveyskill_member} WHERE id = ? ORDER BY end_date DESC', array(intval($id)));
 
-/** REPLACES
-*        return CoreDBWrapper::fetch_single("SELECT * FROM " . "coresurveyskill_member WHERE id = " . intval($id) . " ORDER BY end_date DESC");
+/* REPLACES
+        return CoreDBWrapper::fetch_single("SELECT * FROM " . "coresurveyskill_member WHERE id = " . intval($id) . " ORDER BY end_date DESC");
 */
     } //end function
 
 
-/**
- * sanitises and recodes input for form and db operations
- */
+//sanitises and recodes input for form and db operations
 
     function coresurvey_unsan($str) {
          if( phpversion() < '5.2.3' ) {
@@ -337,10 +314,8 @@ function coresurvey_debug($object) {
         return $str;
     } //end function
 
+// Updates the taken count for a skill survey
 
-    /**
-     * Updates the taken count for a skill survey
-     */
 
     function coresurvey_update_skill_taken_count($id = 0) {
         global $CFG;
@@ -349,10 +324,7 @@ function coresurvey_debug($object) {
         CoreDBWrapper::run_sql($sql);
     } //end function
 
-
-    /**
-     * Updates the taken count for a role survey
-     */
+// Updates the taken count for a role survey
 
     function coresurvey_update_role_taken_count($id = 0) {
         global $CFG;
@@ -362,20 +334,19 @@ function coresurvey_debug($object) {
     } //end function
 
 
-    /**
-     * preps something for putting in the db, note this is BAD!
-     * should be suing db->real_escape_string or similar
-     * NOW REMOVED addslashes as per migration from 1.9 to 2.3
-     */
+/*
+preps something for putting in the db, note this is BAD!
+should be using db->real_escape_string or similar
+NOW REMOVED addslashes as per migration from 1.9 to 2
+*/
 
     function coresurvey_san($str) {
         return $str;
     } // end function
 
 
-    /**
-     * Redirects a page
-     */
+// Redirects a page
+
 
     function coresurvey_page_redirect($str) {
         header(sprintf("Location: %s", $str));

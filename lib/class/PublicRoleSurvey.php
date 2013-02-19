@@ -292,7 +292,7 @@ class PublicRoleSurvey extends Survey {
 
                     // create the slider
                     $s .=  '<div class="attitudeText">
-                                            <div id="slider_header_' . $this->results[$i]['idx'] . '" >&nbsp;<span style="display:none;">' . $this->alignment[2] . '</span></div>
+                                            <div id="slider_header_' . $this->results[$i]['idx'] . '" class="attitudeText" style="">&nbsp;<span style="display:none;">' . $this->alignment[2] . '</span></div>
                                                                     <div id="slider_' . $this->results[$i]['idx'] . '" class="w95 ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"></div>
                                                                                             <input type="hidden" name="answer_' . $this->results[$i]['idx'] . '" id="answer_' . $this->results[$i]['idx'] . '" value="' . $answer . '"/>
                                                                                                                     </div>' . "\n";
@@ -457,7 +457,7 @@ class PublicRoleSurvey extends Survey {
      */
 
     public function raphael() {
-        $width	= 695;
+        $width	= 900;
         $height	= 500;
         $center_x	= round($width / 2);
         $center_y	= round($height / 2);
@@ -465,7 +465,7 @@ class PublicRoleSurvey extends Survey {
         $num_results = $this->count_results();
         $fudge = 20;
 
-        $tooltiprx = 400;
+        $tooltiprx = 650;
         $tooltipry = 250;
 
         $tooltiplx = 100;
@@ -535,6 +535,7 @@ class PublicRoleSurvey extends Survey {
         $start_degree = $current_degree;
         $roles_arc = 360 / count($this->data);
         $roles_radius = $circle_radius + 50;
+        $start_degree = $current_degree;
 
         // ok cycle through all of the results
         foreach($this->data as $rkey => $rval) {
@@ -553,7 +554,7 @@ class PublicRoleSurvey extends Survey {
                 $end_degree = $start_degree + $arc_inc;
 
                 // tooltip position
-                if ($start_degree >= 90 && $start_degree < 270) {
+                if ($start_degree >= 90 && $start_degree <= 270) {
                     $toolx = $tooltiprx;
                     $tooly = $tooltipry;
                 } else {
@@ -587,8 +588,8 @@ class PublicRoleSurvey extends Survey {
                         $align_number = 0;
                 }
 
-                $text = 'Your selection: \n\n\"' . $this->create_text_box( $aval['alignment'][$align_number] ) . '\"\n \nsuggests ' . $this->create_text_box($this->alignmentAdvice[$def_align_number]) . '\n' . $this->create_text_box($aval['title']);
-                $js[] =	'var t_' . $rkey . '_' . $akey . ' = paper.text(' . $toolx . ', ' . $tooly . ', "' . $text . '").attr({"font-size": 14, "text-align": "left", "text-anchor": "start"}).hide();';
+                $text = 'Your selection - \n\n' . $this->create_text_box( $aval['alignment'][$align_number] ) . '\n\n - ' . $this->create_text_box('suggests ' . $this->alignmentAdvice[$def_align_number]) . '\n' . $this->create_text_box($aval['title']);
+                $js[] =	'var t_' . $rkey . '_' . $akey . ' = paper.text(' . $tooltiprx . ', ' . $tooltipry . ', "' . $text . '").attr({"font-size": 14, "text-align": "left", "text-anchor": "start"}).hide();';
                 $js[] =	'var t_' . $rkey . '_' . $akey . '_box = paper.rect(t_' . $rkey . '_' . $akey . '.getBBox().x - 5, t_' . $rkey . '_' . $akey . '.getBBox().y -5, t_' . $rkey . '_' . $akey . '.getBBox().width + 10, t_' . $rkey . '_' . $akey . '.getBBox().height + 10, 5).attr({fill: "#fff"}).hide();';
 
                 // get the bounding box
@@ -640,7 +641,7 @@ class PublicRoleSurvey extends Survey {
             $endx = $center_x + ($roles_radius * cos(-$title_degree * $rad)) - 30;
             $endy = $center_y + ($roles_radius * sin(-$title_degree * $rad));
 
-            $js[]	= 'paper.text(' . $endx . ', ' . $endy . ',"' . wordwrap($rval['name'], 12, '\n') . '").attr({"font-size": 16, "font-weight": "bold", "text-anchor": "start"}).toFront();';
+            $js[]	= 'paper.text(' . $endx . ', ' . $endy . ',"' . $rval['name'] . '").attr({"font-size": 16, "font-weight": "bold", "text-anchor": "start"}).toFront();';
 
             $start_degree = $start_degree + $roles_arc;
         }
@@ -681,7 +682,7 @@ class PublicRoleSurvey extends Survey {
         $text = html_entity_decode($text, ENT_QUOTES);
 
         // now split it
-        return wordwrap($text, 30, '\n');
+        return wordwrap($text, 35, '\n');
 
     } // end create text box
 

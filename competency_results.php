@@ -1,5 +1,13 @@
 <?php  //the results page from a role analysis showing a radar chart with advice
 
+/*
+ 'coresurvey' plug-in for Moodle
+Core Education UK
+http://www.core-ed.org.uk
+Author: Richard Millwood, based on code by Nigel Hulls of CORE Education NZ
+E-mail: richard.millwood2core-ed.org.uk
+*/
+
 require_once(dirname(dirname(dirname(__FILE__))).'/config.php');
 require_once(dirname(__FILE__).'/lib.php');
 
@@ -47,14 +55,20 @@ if (   ! isset($survey->member_survey->m_id)
     coresurvey_page_redirect($CFG->wwwroot . '/mod/coresurvey/view.php?id=' . $cm->id);
 }
 
+//$results = $survey->showCompletedSurvey()
+
+//$core_page->addBody($survey->createJavaAlignment());
 
 // need to load in jquery ui for the slider......
-$PAGE->requires->js('/mod/coresurvey/lib/jquery.ui/js/ui.core.js');
-$PAGE->requires->js('/mod/coresurvey/lib/jquery.ui/js/ui.slider.js');
+$core_page->addBody('<script type="text/javascript" src="' . $CFG->wwwroot . '/mod/coresurvey/lib/jquery.ui/js/ui.core.js"></script>');
+$core_page->addBody('<script type="text/javascript" src="' . $CFG->wwwroot . '/mod/coresurvey/lib/jquery.ui/js/ui.slider.js"></script>');
+$core_page->addHead('<link rel="stylesheet" type="text/css" href="' . $CFG->wwwroot . '/mod/coresurvey/lib/jquery.ui/css/ui-lightness/jquery-ui-1.7.2.custom.css"/>');
+$core_page->addHead('<link rel="stylesheet" type="text/css" href="' . $CFG->wwwroot . '/mod/coresurvey/lib/css/public_survey.css"/>');
+$core_page->addHead('<link rel="stylesheet" type="text/css" href="' . $CFG->wwwroot . '/mod/coresurvey/lib/css/skills.css"/>');
+$core_page->addHead('<link rel="stylesheet" type="text/css" media="print" href="' . $CFG->wwwroot . '/mod/coresurvey/lib/css/print.css"/>');
 
 // load in survey JS
-$PAGE->requires->js('/mod/coresurvey/lib/js/public_survey.js');
-
+$core_page->addBody('<script type="text/javascript" src="' . $CFG->wwwroot . '/mod/coresurvey/lib/js/public_survey.js"></script>');
 
 $analysis = $survey->tabulate($USER->firstname . ' ' . $USER->lastname);
 
@@ -65,13 +79,13 @@ $analysis = $survey->tabulate($USER->firstname . ' ' . $USER->lastname);
 <div>
     <?php echo $analysis; ?>
 </div>
-<div class="core_survey_return_to_overview_button">
+<div class="return_to_overview_button">
     <a
         href="<?php echo $CFG->wwwroot; ?>/mod/coresurvey/view.php?id=<?php echo $cm->id; ?>">
         <button type="button">Return to Overview</button>
     </a>
 </div>
-<div class="coresurvey_print_button">
+<div class="print_button">
     <form>
         <input type="button" value=" Print this guidance"
             onclick="window.print();return false;" />

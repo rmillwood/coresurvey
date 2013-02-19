@@ -1,15 +1,18 @@
 <?php
-
-/**
- * Code fragment to define the version of coresurvey
- * This fragment is called by moodle_needs_upgrading() and /admin/index.php
- *
- * @author  Richard Millwood <richard.millwood@core-ed.org.uk>
- * @version
- * @package mod/coresurvey
+/*
+ 'coresurvey' plug-in for Moodle
+ Core Education UK
+ http://www.core-ed.org.uk
+ Author: Richard Millwood, based on code by Nigel Hulls of CORE Education NZ
+ E-mail: richard.millwood2core-ed.org.uk
  */
 
-$module->version  = 2012121101;  // The current module version (Date: YYYYMMDDXX)
+/*
+ Code fragment to define the version of coresurvey
+ This fragment is called by moodle_needs_upgrading() and /admin/index.php
+ */
+
+$module->version  = 2013021901;  // The current module version (Date: YYYYMMDDXX)
 $module->cron     = 0;           // Period for cron to check this module (secs)
 
 ?>

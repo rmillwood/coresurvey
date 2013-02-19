@@ -1,4 +1,11 @@
 <?php
+/*
+ 'coresurvey' plug-in for Moodle
+ Core Education UK
+ http://www.core-ed.org.uk
+ Author: Richard Millwood, based on code by Nigel Hulls of CORE Education NZ
+ E-mail: richard.millwood2core-ed.org.uk
+ */
 
 defined('MOODLE_INTERNAL') || die();
 

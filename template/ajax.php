@@ -1,11 +1,12 @@
 <?php
-    /**
-     * CORE Survey Tool for MacMillan Cancer Support
-     * CORE Education
-     * http://www.core-ed.net
-     * Author: Nigel Hulls
-     * E-mail: nigel.hulls@core-ed.net
-     */
+/*
+'coresurvey' plug-in for Moodle
+Core Education UK
+http://www.core-ed.org.uk
+Author: Richard Millwood, based on code by Nigel Hulls of CORE Education NZ
+E-mail: richard.millwood2core-ed.org.uk
+*/
+
 
      // first of all Bootstrap the page using the Moodle config file, this gives
      // us access to the Moodle db functions, and also some other libraries

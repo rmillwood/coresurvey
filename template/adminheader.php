@@ -15,14 +15,6 @@
 </head>
 <body>
     <div id="errormask"></div>
-<div id="doc2" class="yui-t7">
-    <div id="hd" role="banner">
-        <a href="http://learnzone.macmillan.org.uk/" title="MacMillan LearnZone">
-            <img id="mac_logo" src="<?php echo $CFG->wwwroot; ?>/mod/coresurvey/images/mac_logo.gif"/>
-        </a>
-        <a href="http://www.core-ed.org.uk" title="Core Education"></a>
-        Core Survey Tool
-    </div>
     <div id="breadcrumbcontainer">
         <?php
             // display breadcrumb
